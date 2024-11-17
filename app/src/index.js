@@ -27,11 +27,7 @@
 // console.log(oneUser, "one user ----------")
 
 // const putUser = await usersTable.updateData("acd67", {
-//     id: "acd67",
-//     name: "Jason Moores updated",
-//     email: "john.doe@example.com",
-//     password: "password12356789",
-//     cartId: "yzbvf"
+//     name: "Jason Moores updated"
 // })
 // console.log(putUser, "put user ----------")
 
