@@ -72,7 +72,7 @@ export default class Table {
     async updateData (id, dataObj) {
         try {
             const response = await fetch(`${this.#url}/${id}`, {
-                method: 'PUT',
+                method: 'PATCH',
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify(dataObj)
             })
