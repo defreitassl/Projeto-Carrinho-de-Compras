@@ -1,6 +1,6 @@
 {
-    "users":[],
-    "products":[],
-    "carts":[],
-    "orders":[]
+  "users": [],
+  "products": [],
+  "carts": [],
+  "orders": []
 }
