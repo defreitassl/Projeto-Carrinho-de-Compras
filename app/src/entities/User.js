@@ -6,8 +6,9 @@ export default class User {
 
     static #id = 1
 
-    constructor(name, email, password) {
+    constructor(name, email, password, typeUser) {
         this.#id = `${name.slice(0,2)}${User.#id}`
+        this.typeUser = typeUser
         this.name = name
         this.#email = email
         this.#password = password
@@ -21,6 +22,15 @@ export default class User {
 
     get email () {
         return this.#email
+    }
+
+    password (caller) {
+        if (caller instanceof Auth) {
+            console.log("Acesso permitido")
+            return this.#password
+        } else {
+            throw new Error("Acesso não autorizado")
+        }
     }
 
     order (order) {

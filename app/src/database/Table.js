@@ -42,7 +42,7 @@ export default class Table {
         }
     }
 
-    async sendData (dataObj) {
+    async send (dataObj) {
         try {
             const response = await fetch(this.url, {
                 method: 'POST',
@@ -69,7 +69,7 @@ export default class Table {
         }
     }
 
-    async updateData (id, dataObj) {
+    async update (id, dataObj) {
         try {
             const response = await fetch(`${this.#url}/${id}`, {
                 method: 'PATCH',
@@ -96,7 +96,7 @@ export default class Table {
         }
     }
 
-    async deleteData (id) {
+    async delete (id) {
         try {
             const response = await fetch(`${this.#url}/${id}`, {
                 method: 'DELETE'
