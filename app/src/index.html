@@ -5,9 +5,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="./index.js" type="module" defer></script>
     <link rel="stylesheet" href="./assets/styles/index.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <title>Carrinho de Compras</title>
 </head>
 <body>
-    
+    <header>
+        <nav>
+            <div class="logo-container">
+                <img src="./assets/images/logo.png" alt="Logo">
+            </div>
+            <div class="search-bar">
+                <input type="search" placeholder="Buscar...">
+                <i class="bi bi-search"></i>
+            </div>
+            <ul>
+                <li>Início</li>
+                <li>
+                    <select id="categoriesSelect">
+                        <option value="all" selected disabled>Categorias:</option>
+                        <option value="jewelery">Jóias</option>
+                        <option value="electronics">Eletrônicos</option>
+                        <option value="men's clothing">Roupas Masculinas</option>
+                        <option value="women's clothing">Roupas Femininas</option>
+                    </select>
+                </li>
+                <div class="account-buttons">
+                    <li>Conta <i class="fa-regular fa-user"></i></li>
+                    <li><i class="bi bi-cart"></i></li>
+                </div>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="categories-box">
+            <div class="categories-box">
+                
+            </div>
+
+            <div class="categories-box"></div>
+
+            <div class="categories-box"></div>
+
+            <div class="categories-box"></div>
+        </section>
+    </main>
 </body>
 </html>

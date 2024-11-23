@@ -1,6 +1,5 @@
 import Table from "./Table.js"
 
-
 export default class UsersTable extends Table {
     constructor () {
         super("users")
