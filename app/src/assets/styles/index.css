@@ -13,6 +13,8 @@ body {
     width: 100%;
     background-color: var(--bg-primary);
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
 }
 
 header {
@@ -21,6 +23,8 @@ header {
     height: fit-content;
     width: 100%;
     background-color: var(--bg-secondary);
+    box-shadow: 0 0 20px 5px;
+    z-index: 10;
 
     nav {
         display: flex;
@@ -50,6 +54,7 @@ header {
             li:hover {
                 color: #fff;
                 font-size: 1.5em;
+                border-bottom: 2px solid white;
             }
         }
     }
@@ -99,4 +104,86 @@ header {
     font-size: 1.2rem;
     font-weight: 500;
     cursor: pointer;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+.hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-block: 1.5rem;
+    width: 100%;
+    background-color: gainsboro;
+}
+
+.hero-body {
+    display: flex;
+    align-items: center;
+    width: 80%;
+
+    .hero-text {
+        letter-spacing: 3px;
+        font-size: xx-large;
+        color:  var(--bg-secondary);
+
+        p {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-left: 5px;
+            color: #9563f8;
+        }
+    } 
+
+    .hero-image-box {
+        width: 50%;
+        
+        img {
+            width: 100%;
+            height: 100%;
+        }
+    }
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 2rem;
+    width: 80%;
+    
+    button {
+        color: var(--bg-primary);
+        font-size: 1.3rem;
+        font-weight: bolder;
+        padding: 0.5rem;
+        border: none;
+        border-radius: 8px;
+        background-color: var(--bg-secondary);
+        cursor: pointer;
+        transition: 0.3s ease;
+    }
+
+    button:hover {
+        background-color: var(--bg-primary);
+        color: var(--bg-secondary);
+        font-weight: bolder;
+    }
+}
+
+.categories-section {
+    display: flex;
+    justify-content: space-around;
+    width: 80%;
+    padding-top: 3rem;
+
+    .categories-box {
+        width: max-content;
+        padding: 1rem;
+        background-color: #7532fb;
+    }
 }
