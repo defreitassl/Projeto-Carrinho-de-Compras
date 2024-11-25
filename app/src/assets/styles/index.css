@@ -1,6 +1,6 @@
 :root {
     --bg-secondary: #7532fb;
-    --bg-primary: #f0f0f0;
+    --bg-primary: #e0dfdf;
 }
 
 * {
@@ -38,13 +38,14 @@ header {
             list-style: none;
             display: flex;
             justify-content: end;
+            gap: 2rem;
 
             .account-buttons {
                 display: flex;
+                gap: 1rem;
             }
     
             li {
-                margin-left: 3rem;
                 font-size: 1.4rem;
                 font-weight: 500;
                 cursor: pointer;
@@ -53,8 +54,7 @@ header {
 
             li:hover {
                 color: #fff;
-                font-size: 1.5em;
-                border-bottom: 2px solid white;
+                border-bottom: 1px solid white;
             }
         }
     }
@@ -98,7 +98,7 @@ header {
 }
 
 #categoriesSelect {
-    width: 140px;
+    width: 115px;
     border: none;
     background-color: transparent;
     font-size: 1.2rem;
@@ -118,7 +118,7 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-block: 1.5rem;
+    padding-block: 5rem;
     width: 100%;
     background-color: gainsboro;
 }
@@ -132,6 +132,7 @@ main {
         letter-spacing: 3px;
         font-size: xx-large;
         color:  var(--bg-secondary);
+        width: 50%;
 
         p {
             font-size: 1.5rem;
@@ -177,13 +178,131 @@ main {
 
 .categories-section {
     display: flex;
-    justify-content: space-around;
-    width: 80%;
-    padding-top: 3rem;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 10rem;
+    background-color: var(--bg-secondary);
+    z-index: 10;
+    box-shadow: 0px 0px 20px 5px black;
 
-    .categories-box {
+    .categories-inner-container {
+        display: flex;
+        justify-content: space-between;
+        width: 80%;
+    }
+
+    .category-box {
+        display: flex;
+        gap: 0.5rem;
         width: max-content;
         padding: 1rem;
-        background-color: #7532fb;
+        background-color: gainsboro;
+        border-radius: 10px;
+        font-size: 1.3rem;
+        font-weight: bolder;
+        color: var(--bg-secondary);
+        box-shadow: 9px 9px 15px 1px black;
+        cursor: pointer;
+        transition: 0.3s ease;
     }
+
+    .category-box:hover {
+        background-color: var(--bg-secondary);
+        color: white;
+        transform: scale(0.95);
+    }
+}
+
+.products-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding-block: 5rem;
+
+    h2 {
+        color: var(--bg-secondary);
+        letter-spacing: 4px;
+        font-size: 2.5rem;
+        border-bottom: 2px solid var(--bg-secondary);
+        margin-bottom: 3rem;
+        width: 80%;
+    }
+
+    .products-inner-container {
+        width: 80%;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1rem;
+    }
+}
+
+
+.product-box {
+    display: flex;
+    flex-direction: column;
+    padding-block: 1rem;
+    border-radius: 16px;
+    background-color: white;
+    box-shadow: 0px 0px 10px 0px black;
+
+    .product-image {
+        width: 100%;
+        border-bottom: 1px solid gray;
+
+        img {
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    .product-body {
+        padding: 0.5rem;
+
+        h3 {
+            font-weight: 200;
+        }
+
+        .price {
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: var(--bg-secondary);
+        }
+
+        .description {
+            font-size: 0.7rem;
+            margin-bottom: 0.5rem;
+        }
+    }
+
+    .product-actions {
+        display: flex;
+        gap: 1rem;
+        padding-inline: 0.5rem;
+
+        button {
+            border: none;
+            padding: 0.5rem;
+            border-radius: 8px;
+            transition: 0.3s ease;
+        }
+
+        .buy-button:hover {
+            background-color: var(--bg-secondary);
+            color: white;
+        }
+
+        .add-to-cart-btn:hover {
+            background-color: greenyellow;
+        }
+    }
+}
+
+.product-box:hover {
+    transform: scale(1.05);
+    color: blue;
+    
 }
