@@ -1,5 +1,4 @@
-import Database from "./database/Database.js"
-
+import Database from "./database/Database"
 
 const postUser1 = await Database.users.send({
     id: "agh358",

@@ -8,7 +8,6 @@
     "pack": "npx webpack",
     "start": "webpack-dev-server"
   },
-  "type": "module",
   "keywords": [],
   "author": "Douglas Freitas",
   "license": "ISC",
