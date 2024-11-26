@@ -4,7 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 module.exports = {
     devServer: {
         static: {
-          directory: path.resolve(__dirname, 'dist')
+          directory: path.resolve(__dirname, './app/dist')
         },
         compress: true,
         port: 8080
