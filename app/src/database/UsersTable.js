@@ -17,11 +17,7 @@ export default class UsersTable extends Table {
 
     async getUserByEmail (email) {
         const userRequired = await this.findEmail(email)
-        if (userRequired) {
-            return userRequired
-        } else {
-            return false
-        }
+        return userRequired
     }
 
     async send (userObj) { // Sobreescreve função de POST e verifica se o email a ser cadastrado já existe

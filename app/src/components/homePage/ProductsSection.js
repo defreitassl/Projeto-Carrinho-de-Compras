@@ -1,7 +1,7 @@
 import Component from "../Component.js"
 
 export default class ProductsSection extends Component {
-    constructor (userLogged) {
+    constructor () {
         super(".products-container", `
             <section class="products-section">
                 <h2>Nossos produtos</h2>

@@ -18,10 +18,6 @@
 // console.log(postUser1)
 // console.log(postUser2)
 
-// import App from "./App.js"
+import App from "./App.js"
 
-// App.init()
-
-function goToCart () {
-    console.log("Você está no carrinho")
-}
+App.init()
