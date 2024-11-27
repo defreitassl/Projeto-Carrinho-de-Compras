@@ -2,11 +2,18 @@ import Database from '../database/Database.js'
 
 export default class Auth {
 
-    constructor (email, password) {
-        this.currentUser = this.verifyUser(email, password)
+    static instance
+
+    constructor () {
+
+        if (Auth.instance) {
+            return Auth.instance
+        } else {
+            Auth.instance = this
+        }
     }
 
-    verifyUser (email, password) {
+    login (email, password) {
         try {
             const user = Database.users.getUserByEmail(email)
             
@@ -22,4 +29,6 @@ export default class Auth {
             throw new Error("Erro inesperado ao verficar usuário: " + error)
         }
     }
+
+    logout () {}
 }

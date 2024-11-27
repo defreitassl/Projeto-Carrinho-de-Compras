@@ -1,7 +1,7 @@
-import Component from "./Component.js"
+import Component from "../Component.js"
 
 export default class HeroSection extends Component {
-    constructor() {
+    constructor(userLogged) {
         super(".hero-container", `
             <section class="hero">
                 <div class="hero-body">
