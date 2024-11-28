@@ -1,5 +1,12 @@
 {
-  "users": [],
+  "users": [
+    {
+      "id": 1,
+      "name": "John Doe",
+      "email": "john.doe@example.com",
+      "password": "password123"
+    }
+  ],
   "carts": [],
   "orders": []
 }

@@ -14,13 +14,13 @@ export default class Auth {
         }
     }
 
-    login (email, password) {
+    async login (email, password) {
         try {
-            const user = Database.users.getUserByEmail(email)
+            const user = await Database.users.getUserByEmail(email)
+            console.log(user)
             
             if (user) {
-                const userPassword = user.password(this)
-                if (password === userPassword) {
+                if (password === user.password) {
                     this.userLogged = true
                     return user
                 } else {
