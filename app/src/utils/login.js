@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const createAccountForm = document.querySelector(".create-account-form")
 
     toCreateAccountBtn.addEventListener("click", () => {
-        loginSlider.style.transform = "translateX(-50%)"
+        loginSlider.style.transform = "translateX(-75%)"
         // loginForm.classList.add("hidden")
         // createAccountForm.classList.remove("hidden")
     })
