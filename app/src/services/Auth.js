@@ -5,19 +5,12 @@ export default class Auth {
     static instance
 
     constructor () {
-
-        if (Auth.instance) {
-            return Auth.instance
-        } else {
-            this.userLogged = false
-            Auth.instance = this
-        }
+        this.userLogged = false
     }
 
     async login (email, password) {
         try {
             const user = await Database.users.getUserByEmail(email)
-            console.log(user)
             
             if (user) {
                 if (password === user.password) {

@@ -18,7 +18,7 @@ export default class HomePage {
         this.products = new ProductsSection()
         
         this.navbar.render() // render the navbar
-        userLogged ? this.hero.render() : console.log("Usuário já está logado | Hero Section nao será renderizado") // render the hero section case the user is not logged
+        !userLogged ? this.hero.render() : console.log("Usuário já está logado | Hero Section nao será renderizado") // render the hero section case the user is not logged
         this.categories.render() // render the categories section
         this.products.render() // render the products section
     }

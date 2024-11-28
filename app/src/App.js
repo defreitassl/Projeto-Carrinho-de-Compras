@@ -20,8 +20,8 @@ export default class App {
     goToHomePage(userLogged) {
         this.isOnHomePage = true  // Marcamos como na página inicial
         this.cleanScreen()
-        this.homePage = new HomePage(userLogged)
-        this.homePage.renderScreen()
+        this.homePage = new HomePage()
+        this.homePage.renderScreen(userLogged)
         this.renderProducts()
     }
 

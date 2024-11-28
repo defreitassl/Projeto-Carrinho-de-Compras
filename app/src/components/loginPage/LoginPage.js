@@ -6,10 +6,14 @@ export default class LoginPage{
     }
 
     renderScreen() {
+        this.loginContainer.container.style.width = "100vw"
+        this.loginContainer.container.style.height = "100vh"
         this.loginContainer.render()
     }
 
     cleanScreen() {
+        this.loginContainer.container.style.width = "0px"
+        this.loginContainer.container.style.height = "0px"
         this.loginContainer.remove()
     }
 
