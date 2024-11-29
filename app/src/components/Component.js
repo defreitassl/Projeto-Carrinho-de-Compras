@@ -8,11 +8,11 @@ export default class Component {
 
     render () {
         this.container.innerHTML = this.content
-        console.log(`Conteúdo renderizado na tag ${this.outerDivTag}`)
+        // console.log(`Conteúdo renderizado na tag ${this.outerDivTag}`)
     }
 
     remove () {
         this.container.innerHTML = ''
-        console.log(`Conteúdo removido da tag ${this.outerDivTag}`)
+        // console.log(`Conteúdo removido da tag ${this.outerDivTag}`)
     }
 }

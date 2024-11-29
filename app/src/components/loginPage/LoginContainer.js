@@ -53,6 +53,6 @@ export default class LoginContainer extends Component {
                     </div>
                 </div>
             </div>    
-        `);
+        `)
     }
 }

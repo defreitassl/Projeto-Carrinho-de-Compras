@@ -1,21 +1,18 @@
 import Database from '../database/Database.js'
+import Session from './Session.js'
+import User from '../entities/User.js'
 
 export default class Auth {
 
-    static instance
+    constructor () {}
 
-    constructor () {
-        this.userLogged = false
-    }
-
-    async login (email, password) {
+    async login (app, email, password) {
         try {
             const user = await Database.users.getUserByEmail(email)
             
             if (user) {
                 if (password === user.password) {
-                    this.userLogged = true
-                    return user
+                    app.session.initSession(user)
                 } else {
                     return "Senha incorreta. Tente novamente."
                 }
@@ -25,6 +22,10 @@ export default class Auth {
         } catch (error) {
             throw new Error("Erro inesperado ao verficar usuário: " + error)
         }
+    }
+
+    async register (app, name, email, password) {
+        try {} catch (error) {}
     }
 
     logout () {} // Mudar user logged para falso e reiniciar o app

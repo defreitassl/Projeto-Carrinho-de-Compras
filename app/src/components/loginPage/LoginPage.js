@@ -23,12 +23,12 @@ export default class LoginPage{
             const password = document.querySelector('#password')
 
             if (email.value && password.value) {
-                const result = await authenticator.login(email.value, password.value)
+                const result = await authenticator.login(app, email.value, password.value)
                 
                 if (typeof result === "string") {
                     alert(result)
                 } else {
-                    app.goToHomePage(authenticator.userLogged)
+                    app.goToHomePage(app.session.isActive)
                 }
             } else {
                 alert('Preencha todos os campos antes de enviar.')
@@ -42,9 +42,8 @@ export default class LoginPage{
             const seller = document.querySelector('#seller')
 
             if (name.value && email.value && password.value) {
-                // Aqui você deve enviar os dados para a lógica de criar conta
-                console.log([name.value, email.value, password.value, seller.checked])
-                // Implemente a lógica de cadastro conforme necessário
+                authenticator.register(name.value, email.value, password.value, seller.checked)
+                // Adicionar o restante da lógica de cadastro e verificação se o perfil é de vendedor ou não
             } else {
                 alert('Preencha todos os campos antes de enviar.')
             }

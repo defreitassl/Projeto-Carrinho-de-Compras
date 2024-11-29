@@ -3,6 +3,7 @@ import ProductsApi from "./services/FakeStoreApi.js"
 import ProductCard from "./components/homePage/ProductCard.js"
 import HomePage from "./components/homePage/HomePage.js"
 import LoginPage from "./components/loginPage/LoginPage.js"
+import Session from "./services/Session.js"
 
 export default class App {
     constructor() {
@@ -11,6 +12,7 @@ export default class App {
         this.loginPage = null
         this.cartPage = null
         this.isOnHomePage = false  // Flag para monitorar se estamos na página inicial
+        this.session = new Session()
     }
 
     init() {
@@ -30,7 +32,19 @@ export default class App {
         this.loginPage = new LoginPage()
         this.cleanScreen()
         this.loginPage.renderScreen()
-        this.loginPage.addEventListeners(this.authenticator, this) // Passar auth e app
+        this.loginPage.addEventListeners(this.authenticator, this)
+    }
+
+    cleanScreen() {
+        if (this.homePage) {
+            this.homePage.cleanScreen()
+        }
+        if (this.loginPage) {
+            this.loginPage.cleanScreen()
+        }
+        if (this.cartPage) {
+            this.cartPage.cleanScreen()
+        }
     }
 
     async renderProducts() {
@@ -49,18 +63,6 @@ export default class App {
                 )
                 newProduct.render()
             })
-        }
-    }
-
-    cleanScreen() {
-        if (this.homePage) {
-            this.homePage.cleanScreen()
-        }
-        if (this.loginPage) {
-            this.loginPage.cleanScreen()
-        }
-        if (this.cartPage) {
-            this.cartPage.cleanScreen()
         }
     }
 }
