@@ -54,7 +54,20 @@ header {
                 font-size: 1.4rem;
                 font-weight: 500;
                 cursor: pointer;
+                border-bottom: 1px solid transparent;
                 transition: 0.3s ease;
+
+                a {
+                    text-decoration: none;
+                    color: black;
+                    border-bottom: 1px solid transparent;
+                    transition: 0.3s ease;
+                }
+
+                a:hover {
+                    color: #fff;
+                    border-bottom: 1px solid white;
+                }
             }
 
             li:hover {
@@ -449,5 +462,38 @@ main {
         background-color: #9563f8;
         transform: scale(0.95);
         color: var(--bg-secondary);
+    }
+}
+
+
+/* Estilização da página do carrinho */
+.cart-inner-container {
+    height: 100%;
+    width: 80%;
+    padding-top: 3rem;
+    display: flex;
+}
+
+.cart-products {
+    border-right: 3px solid #7532fb;
+    padding: 2rem;
+    width: 60%;
+    
+    h2 {
+        font-size: 2rem;
+        width: 100%;
+        border-bottom: 2px solid #887f7f;
+    }
+}
+
+.cart-resume {
+    padding: 2rem;
+    width: 40%;
+    
+    h2 {
+        text-align: center;
+        font-size: 2rem;
+        width: 100%;
+        border-bottom: 2px solid #887f7f;
     }
 }

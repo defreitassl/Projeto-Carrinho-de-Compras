@@ -1,4 +1,4 @@
-import Component from "../Component.js"
+import Component from "./Component.js"
 
 export default class NavBar extends Component {
     constructor () {
@@ -12,7 +12,7 @@ export default class NavBar extends Component {
                     <i class="bi bi-search"></i>
                 </div>
                 <ul>
-                    <li>Início</li>
+                    <li><a href="#home">Início</a></li>
                     <div class="account-buttons">
                         <li><i class="fa-regular fa-user"></i></li>
                         <li><i class="bi bi-cart"></i></li>

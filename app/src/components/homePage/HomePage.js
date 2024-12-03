@@ -1,6 +1,6 @@
 import HeroSection from "./HeroSection.js"
 import Categories from "./Categories.js"
-import NavBar from "./NavBar.js"
+import NavBar from "../NavBar.js"
 import ProductsSection from "./ProductsSection.js"
 
 export default class HomePage {
@@ -31,6 +31,7 @@ export default class HomePage {
     }
 
     addEventListeners (authenticator, app) {
-        
+        this.hero.addEventListener(app)
+        this.categories.addEventListener(app)
     }
 }

@@ -4,6 +4,7 @@ import ProductCard from "./components/homePage/ProductCard.js"
 import HomePage from "./components/homePage/HomePage.js"
 import LoginPage from "./components/loginPage/LoginPage.js"
 import Session from "./services/Session.js"
+import FakeStoreApi from "./services/FakeStoreApi.js"
 
 export default class App {
     constructor() {
@@ -22,12 +23,13 @@ export default class App {
         this.goToHomePage(this.session.isActive)
     }
 
-    goToHomePage(userLogged) {
+    goToHomePage(userLogged, products=false) {
         this.cleanScreen()
         this.isOnHomePage = true  // Marcamos como na página inicial
         this.homePage = new HomePage()
         this.homePage.renderScreen(userLogged)
-        this.renderProducts()
+        this.renderProducts(products)
+        this.homePage.addEventListeners(this.authenticator, this)
     }
 
     goToLoginPage() {
@@ -44,12 +46,18 @@ export default class App {
         //this.cartPage.cleanScreen()
     }
 
-    async renderProducts() {
-        const products = await ProductsApi.getAllProducts()
+    async renderProducts(products=false) {
+        let productsList
+
+        if (products) {
+            productsList = products
+        } else {
+            productsList = await ProductsApi.getAllProducts()
+        }
 
         // Renderizar apenas se ainda estivermos na página inicial
         if (this.isOnHomePage) {
-            products.forEach(product => {
+            productsList.forEach(product => {
                 const newProduct = new ProductCard(
                     product.id,
                     product.image,
@@ -61,5 +69,10 @@ export default class App {
                 newProduct.render()
             })
         }
+    }
+
+    async getProductByCategory (category) {
+        const products = await FakeStoreApi.getProductsByCategory(category)
+        this.goToHomePage(this.session.isActive, products)
     }
 }

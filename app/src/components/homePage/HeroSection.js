@@ -14,10 +14,19 @@ export default class HeroSection extends Component {
                     </div>
                 </div>
                 <div class="hero-buttons">
-                    <button>Fazer Login</button>
-                    <button>Criar conta</button>
+                    <button class="goToLoginPageBtn">Fazer Login</button>
+                    <button class="goToLoginPageBtn">Criar conta</button>
                 </div>
             </section>    
         `)
+    }
+
+    addEventListener (app) {
+        const buttons = document.querySelectorAll(".goToLoginPageBtn")
+        buttons.forEach(button => {
+            button.addEventListener("click", () => {
+                app.goToLoginPage()
+            })
+        })
     }
 }
