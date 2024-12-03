@@ -1,3 +1,5 @@
+import User from "../entities/User.js"
+
 export default class Session {
     #currentUser
     #isActive
@@ -8,9 +10,13 @@ export default class Session {
     }
 
     initSession (user) {
-        this.#isActive = true
-        this.#currentUser = user
-        console.log(`A seção de ${this.#currentUser.name} foi inicializada.`)
+        if (user instanceof User) {
+            this.#isActive = true
+            this.#currentUser = user
+            console.log(`A seção de ${this.#currentUser.name} foi inicializada.`)
+        } else {
+            throw new Error("O usuário para iniciar a sessão deve ser uma instância de User.")
+        }
     }
 
     endSession () {

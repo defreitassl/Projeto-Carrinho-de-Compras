@@ -9,9 +9,9 @@ export default class User {
     // Realiza uma série de verificações para saber se o usuário foi pego do banco de dados 
     //ou se é um novo usuário. Se for um novo usuário a classe cria um ID, cartId e lista de pedidos, 
     //se for um usuário existente ele pega as informações prontas passadas a partir do banco de dados
-    constructor(id=null, typeUser, name, email, password, cartId=null, orders=null) {
+    constructor(id=null, isSeller, name, email, password, cartId=null, orders=null) {
         this.#id = id === null ? `${name.slice(0,2)}${User.#idRaw}` : id
-        this.typeUser = typeUser
+        this.isSeller = isSeller
         this.name = name
         this.#email = email
         this.#password = password
@@ -39,5 +39,17 @@ export default class User {
 
     order (order) {
         this.#orders.push(order)
+    }
+
+    toJSON () {
+        return {
+            id: this.#id,
+            isSeller: this.isSeller,
+            name: this.name,
+            email: this.#email,
+            password: this.#password,
+            cartId: this.cartId,
+            orders: this.#orders
+        }
     }
 }

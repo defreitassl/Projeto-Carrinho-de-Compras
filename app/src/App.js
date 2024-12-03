@@ -8,7 +8,7 @@ import Session from "./services/Session.js"
 export default class App {
     constructor() {
         this.authenticator = new Auth()
-        this.homePage = null
+        this.homePage = new HomePage()
         this.loginPage = null
         this.cartPage = null
         this.isOnHomePage = false  // Flag para monitorar se estamos na página inicial
@@ -16,35 +16,32 @@ export default class App {
     }
 
     init() {
-        this.goToHomePage(this.authenticator.userLogged)
+        this.loginPage = new LoginPage()
+        this.homePage = new HomePage()
+        // Adicionar instacia do cartPage
+        this.goToHomePage(this.session.isActive)
     }
 
     goToHomePage(userLogged) {
-        this.isOnHomePage = true  // Marcamos como na página inicial
         this.cleanScreen()
+        this.isOnHomePage = true  // Marcamos como na página inicial
         this.homePage = new HomePage()
         this.homePage.renderScreen(userLogged)
         this.renderProducts()
     }
 
     goToLoginPage() {
+        this.cleanScreen()
         this.isOnHomePage = false  // Marcamos que não estamos mais na página inicial
         this.loginPage = new LoginPage()
-        this.cleanScreen()
         this.loginPage.renderScreen()
         this.loginPage.addEventListeners(this.authenticator, this)
     }
 
     cleanScreen() {
-        if (this.homePage) {
-            this.homePage.cleanScreen()
-        }
-        if (this.loginPage) {
-            this.loginPage.cleanScreen()
-        }
-        if (this.cartPage) {
-            this.cartPage.cleanScreen()
-        }
+        this.homePage.cleanScreen()
+        this.loginPage.cleanScreen()
+        //this.cartPage.cleanScreen()
     }
 
     async renderProducts() {

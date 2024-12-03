@@ -55,7 +55,7 @@ export default class Table {
             }
 
             const data = await response.json()
-            
+
             return {
                 status: "OK",
                 message: "Dados enviados com sucesso",

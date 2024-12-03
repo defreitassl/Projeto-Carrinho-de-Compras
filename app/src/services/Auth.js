@@ -1,5 +1,4 @@
 import Database from '../database/Database.js'
-import Session from './Session.js'
 import User from '../entities/User.js'
 
 export default class Auth {
@@ -12,7 +11,16 @@ export default class Auth {
             
             if (user) {
                 if (password === user.password) {
-                    app.session.initSession(user)
+                    const currentUser = new User(
+                        user.id,
+                        user.isSeller,
+                        user.name,
+                        user.email,
+                        user.password,
+                        user.cartId,
+                        user.orders
+                    )
+                    app.session.initSession(currentUser)
                 } else {
                     return "Senha incorreta. Tente novamente."
                 }
@@ -24,9 +32,22 @@ export default class Auth {
         }
     }
 
-    async register (app, name, email, password) {
-        try {} catch (error) {}
+    async register (app, isSeller, name, email, password) {
+        try {
+            const newUser = new User(null, isSeller, name, email, password, null, null)
+
+            const response = await Database.users.send(newUser)
+
+            if (response.status === "OK") {
+                app.session.initSession(newUser)
+                return response
+            } else {
+                return response
+            }
+        } catch (error) {
+            throw new Error("Erro inesperado ao criar usuário: " + error)
+        }
     }
 
-    logout () {} // Mudar user logged para falso e reiniciar o app
+    logout () {} // Finalizar a sessao
 }

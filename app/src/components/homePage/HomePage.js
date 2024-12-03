@@ -5,10 +5,10 @@ import ProductsSection from "./ProductsSection.js"
 
 export default class HomePage {
     constructor () {
-        this.navbar
-        this.hero
-        this.categories
-        this.products
+        this.navbar = new NavBar()
+        this.hero = new HeroSection()
+        this.categories = new Categories()
+        this.products = new ProductsSection()
     }
     
     renderScreen (userLogged) {
@@ -28,5 +28,9 @@ export default class HomePage {
         this.hero.remove()
         this.categories.remove()
         this.products.remove()
+    }
+
+    addEventListeners (authenticator, app) {
+        
     }
 }

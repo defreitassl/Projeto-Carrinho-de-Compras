@@ -35,15 +35,19 @@ export default class LoginPage{
             }
         })
 
-        document.querySelector('.create-account-button').addEventListener("click", () => {
+        document.querySelector('.create-account-button').addEventListener("click", async () => {
             const name = document.querySelector('#newName')
             const email = document.querySelector('#newEmail')
             const password = document.querySelector('#newPassword')
             const seller = document.querySelector('#seller')
 
             if (name.value && email.value && password.value) {
-                authenticator.register(name.value, email.value, password.value, seller.checked)
-                // Adicionar o restante da lógica de cadastro e verificação se o perfil é de vendedor ou não
+                const response = await authenticator.register(app, seller.checked, name.value, email.value, password.value)
+
+                alert(response.message)
+                if (response.status === "OK") {
+                    app.goToHomePage(app.session.isActive)
+                } 
             } else {
                 alert('Preencha todos os campos antes de enviar.')
             }

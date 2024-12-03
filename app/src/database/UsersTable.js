@@ -22,7 +22,7 @@ export default class UsersTable extends Table {
 
     async send (userObj) { // Sobreescreve função de POST e verifica se o email a ser cadastrado já existe
         const emailExists = await this.findEmail(userObj.email)
-        console.log(emailExists)
+
         if (emailExists) {
             return {
                 status: "ERROR",

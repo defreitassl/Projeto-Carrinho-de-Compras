@@ -1,11 +1,13 @@
 {
   "users": [
     {
-      "id": 1,
-      "name": "John Doe",
-      "email": "john.doe@example.com",
-      "password": "password123",
-      "typeUser": "customer"
+      "id": "Do1",
+      "isSeller": false,
+      "name": "Douglas Freitas",
+      "email": "douglasamf14@gmail.com",
+      "password": "14Douglas$$",
+      "cartId": "Ca1",
+      "orders": []
     }
   ],
   "carts": [],
