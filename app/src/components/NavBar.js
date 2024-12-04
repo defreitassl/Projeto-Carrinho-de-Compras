@@ -12,7 +12,7 @@ export default class NavBar extends Component {
                     <i class="bi bi-search"></i>
                 </div>
                 <ul>
-                    <li><a href="#home">Início</a></li>
+                    <li>Início</li>
                     <div class="account-buttons">
                         <li><i class="fa-regular fa-user"></i></li>
                         <li><i class="bi bi-cart"></i></li>
