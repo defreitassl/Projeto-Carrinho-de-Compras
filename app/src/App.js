@@ -1,8 +1,8 @@
 import Auth from "./services/Auth.js"
-import ProductsApi from "./services/FakeStoreApi.js"
 import ProductCard from "./components/homePage/ProductCard.js"
 import HomePage from "./components/homePage/HomePage.js"
 import LoginPage from "./components/loginPage/LoginPage.js"
+import CartPage from "./components/cartPage/CartPage.js"
 import Session from "./services/Session.js"
 import FakeStoreApi from "./services/FakeStoreApi.js"
 
@@ -19,7 +19,7 @@ export default class App {
     init() {
         this.loginPage = new LoginPage()
         this.homePage = new HomePage()
-        // Adicionar instacia do cartPage
+        this.cartPage = new CartPage()
         this.goToHomePage(this.session.isActive)
     }
 
@@ -43,7 +43,7 @@ export default class App {
     cleanScreen() {
         this.homePage.cleanScreen()
         this.loginPage.cleanScreen()
-        //this.cartPage.cleanScreen()
+        this.cartPage.cleanScreen()
     }
 
     async renderProducts(products=false) {
@@ -52,7 +52,7 @@ export default class App {
         if (products) {
             productsList = products
         } else {
-            productsList = await ProductsApi.getAllProducts()
+            productsList = await FakeStoreApi.getAllProducts()
         }
 
         // Renderizar apenas se ainda estivermos na página inicial
@@ -74,5 +74,12 @@ export default class App {
     async getProductByCategory (category) {
         const products = await FakeStoreApi.getProductsByCategory(category)
         this.goToHomePage(this.session.isActive, products)
+    }
+
+    async searchProducts (searchValue) {
+        const allProducts = await FakeStoreApi.getAllProducts()
+        
+        const filteredProducts = allProducts.filter(product => product.title.toLowerCase().includes(searchValue.toLowerCase()))
+        this.goToHomePage(this.session.isActive, filteredProducts)
     }
 }

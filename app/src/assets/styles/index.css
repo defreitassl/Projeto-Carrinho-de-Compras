@@ -7,6 +7,7 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .hidden {
@@ -44,11 +45,7 @@ header {
             display: flex;
             justify-content: end;
             gap: 2rem;
-
-            .account-buttons {
-                display: flex;
-                gap: 1rem;
-            }
+            position: relative;
     
             li {
                 font-size: 1.4rem;
@@ -61,6 +58,44 @@ header {
             li:hover {
                 color: #fff;
                 border-bottom: 1px solid white;
+            }
+        }
+    }
+}
+
+.account-buttons {
+    display: flex;
+    gap: 1rem;
+
+    .dropdown-menu {
+        display: none;
+        position: absolute;
+        top: 100;
+        right: 0;
+        background-color: white;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+        margin-top: 25%;
+        z-index: 10;
+        transition: opacity 0.3s ease;
+
+        ul {
+            list-style: none;
+
+            li {
+                padding: 0.8rem 1.2rem;
+
+                p {
+                    color: #7532fb;
+                    font-weight: bold;
+                    font-size: 1rem;
+                    transition: background 0.3s ease;
+                }
+
+                p:hover {
+                    background-color: #f1f1f1;
+                    border-radius: 3px;
+                }
             }
         }
     }
@@ -81,35 +116,35 @@ header {
     display: flex;
     justify-content: center;
     margin-bottom: 0.9rem;
-    width: 40%;
+    width: 70%;
     height: 100%;
 
     input {
+        position: relative;
         color: #887f7f;
         font-size: 1.5rem;
         border: none;
         border-radius: 8px 0px 0px 8px;
         padding: 2px;
-        width: 100%;
+        width: 450px;
     }
 
-    i {
-        font-size: 1.7rem;
-        background-color: white;
-        border-radius: 0px 8px 8px 0px;
-        padding-top: 5px;
-        padding-right: 8px;
-        cursor: pointer;
-    }
-}
+    button {
+        position: absolute;
+        background-color: transparent;
+        border: none;
+        margin-top: 5px;
+        width: fit-content;
 
-#categoriesSelect {
-    width: 115px;
-    border: none;
-    background-color: transparent;
-    font-size: 1.2rem;
-    font-weight: 500;
-    cursor: pointer;
+        i {
+            font-size: 1.5rem;
+            background-color: white;
+            border-radius: 0px 8px 8px 0px;
+            padding-top: 5px;
+            padding-right: 8px;
+            cursor: pointer;
+        }
+    }
 }
 
 main {
@@ -615,5 +650,11 @@ main {
         background-color: var(--bg-secondary);
         border: none;
         border-radius: 8px;
+        cursor: pointer;
+        transition: 0.3s ease;
+    }
+
+    button:hover {
+        background-color: #5910eb;
     }
 }

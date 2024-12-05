@@ -31,6 +31,7 @@ export default class HomePage {
     }
 
     addEventListeners (authenticator, app) {
+        this.navbar.addEventListener(authenticator, app)
         this.hero.addEventListener(app)
         this.categories.addEventListener(app)
     }

@@ -49,5 +49,7 @@ export default class Auth {
         }
     }
 
-    logout () {} // Finalizar a sessao
+    logout (app) {
+        app.session.endSession()
+    }
 }

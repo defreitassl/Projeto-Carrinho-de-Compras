@@ -44,7 +44,7 @@ export default class Categories extends Component {
         })
 
         document.querySelector(".all").addEventListener("click", () => {
-            app.goToHomePage()
+            app.goToHomePage(app.session.isActive)
         })
     }
 }
