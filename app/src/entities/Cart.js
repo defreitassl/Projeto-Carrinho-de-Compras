@@ -3,11 +3,12 @@ export default class Cart {
     #owner
     #products
 
-    constructor (id, owner) {
+    //Faz verificações para saber se o carrinho está sendo criado agora ou se ele já existe no banco de dados
+    constructor (id, owner, products=null, totalPrice=null) {
         this.#id = id
         this.#owner = owner
-        this.#products = []
-        this.totalPrice = 0
+        this.#products = products === null ? [] : products
+        this.totalPrice = totalPrice === null ? 0 : totalPrice
     }
 
     get id () {
@@ -19,6 +20,7 @@ export default class Cart {
     }
 
     addProduct (product) {
+        console.log("Produto adicionado")
         this.#products.push(product)
         this.#calculatePrice()
     }
@@ -27,5 +29,14 @@ export default class Cart {
         this.totalPrice = this.#products.reduce((accum, product) => {
             return accum + product.price
         })
+    }
+
+    toJSON () {
+        return {
+            id: this.#id,
+            owner: this.#owner,
+            products: this.#products,
+            totalPrice: this.totalPrice
+        }
     }
 }

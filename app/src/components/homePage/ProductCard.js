@@ -33,4 +33,8 @@ export default class ProductCard extends Component {
         this.container.querySelector(`#${this.id}`).remove()
         console.log(`Conteúdo removido da tag ${this.outerDivTag}`)
     }
+
+    addEventListener () {
+        
+    }
 }

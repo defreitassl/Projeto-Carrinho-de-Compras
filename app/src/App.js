@@ -1,5 +1,6 @@
 import Auth from "./services/Auth.js"
 import ProductCard from "./components/homePage/ProductCard.js"
+import CartProduct from "./components/cartPage/CartProduct.js"
 import HomePage from "./components/homePage/HomePage.js"
 import LoginPage from "./components/loginPage/LoginPage.js"
 import CartPage from "./components/cartPage/CartPage.js"
@@ -13,6 +14,7 @@ export default class App {
         this.loginPage = null
         this.cartPage = null
         this.isOnHomePage = false  // Flag para monitorar se estamos na página inicial
+        this.isOnCartPage = false
         this.session = new Session()
     }
 
@@ -26,15 +28,26 @@ export default class App {
     goToHomePage(userLogged, products=false) {
         this.cleanScreen()
         this.isOnHomePage = true  // Marcamos como na página inicial
+        this.isOnCartPage = false
         this.homePage = new HomePage()
         this.homePage.renderScreen(userLogged)
         this.renderProducts(products)
         this.homePage.addEventListeners(this.authenticator, this)
     }
 
+    goToCartPage() {
+        this.cleanScreen()
+        this.isOnHomePage = false
+        this.isOnCartPage = true // Marcamos como na página de carrinho
+        this.cartPage = new CartPage()
+        this.cartPage.renderScreen()
+        this.cartPage.addEventListeners(this.authenticator, this)
+    }
+
     goToLoginPage() {
         this.cleanScreen()
-        this.isOnHomePage = false  // Marcamos que não estamos mais na página inicial
+        this.isOnHomePage = false
+        this.isOnCartPage = false
         this.loginPage = new LoginPage()
         this.loginPage.renderScreen()
         this.loginPage.addEventListeners(this.authenticator, this)
@@ -66,7 +79,20 @@ export default class App {
                     product.description,
                     product.rating.rate
                 )
+                newProduct.addEventListener()
                 newProduct.render()
+            })
+
+            const allProducts = document.querySelectorAll(".product-card")
+            allProducts.forEach(product => {
+                product.querySelector(".add-to-cart-btn").addEventListener("click", () => {
+                    
+                    if (this.session.isActive) {
+                        this.addProductToCart(product.getAttribute("id"))
+                    } else {
+                        this.goToLoginPage()
+                    }
+                })
             })
         }
     }
@@ -81,5 +107,10 @@ export default class App {
         
         const filteredProducts = allProducts.filter(product => product.title.toLowerCase().includes(searchValue.toLowerCase()))
         this.goToHomePage(this.session.isActive, filteredProducts)
+    }
+
+    async addProductToCart (product) {
+        this.session.currentUserCart.addProduct(product)
+        this.authenticator.addProductToCartDb(this.session.currentUserCart, product)
     }
 }

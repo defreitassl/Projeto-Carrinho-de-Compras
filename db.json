@@ -10,6 +10,13 @@
       "orders": []
     }
   ],
-  "carts": [],
+  "carts": [
+    {
+      "id": "Ca1",
+      "owner": "Do1",
+      "products": [],
+      "totalPrice": 0
+    }
+  ],
   "orders": []
 }

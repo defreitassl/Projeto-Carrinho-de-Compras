@@ -3,16 +3,19 @@ import User from "../entities/User.js"
 export default class Session {
     #currentUser
     #isActive
+    #currentUserCart
 
     constructor () {
         this.#isActive = false
         this.#currentUser = null
+        this.#currentUserCart = null
     }
 
-    initSession (user) {
+    initSession (user, cart) {
         if (user instanceof User) {
             this.#isActive = true
             this.#currentUser = user
+            this.#currentUserCart = cart
             console.log(`A seção de ${this.#currentUser.name} foi inicializada.`)
         } else {
             throw new Error("O usuário para iniciar a sessão deve ser uma instância de User.")
@@ -31,6 +34,10 @@ export default class Session {
 
     get currentUser () {
         return this.#currentUser
+    }
+
+    get currentUserCart () {
+        return this.#currentUserCart
     }
 
     set currentUser (user) {

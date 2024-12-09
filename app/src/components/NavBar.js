@@ -14,7 +14,7 @@ export default class NavBar extends Component {
                     </form>
                 </div>
                 <ul>
-                    <li>Início</li>
+                    <li id="goHomeBtn">Início</li>
                     <div class="account-buttons">
                         <li id="userBtn"><i class="fa-regular fa-user"></i></li>
                         <div class="dropdown-menu">
@@ -22,7 +22,7 @@ export default class NavBar extends Component {
                                 <li><p id="logoutBtn">Sair da Conta</p></li>
                             </ul>
                         </div>
-                        <li><i class="bi bi-cart"></i></li>
+                        <li id="cartMenuBtn"><i class="bi bi-cart"></i></li>
                     </div>
                 </ul>
             </nav>
@@ -35,6 +35,10 @@ export default class NavBar extends Component {
 
             const searchValue = document.querySelector("#searchFormInput").value
             app.searchProducts(searchValue)
+        })
+
+        document.querySelector("#goHomeBtn").addEventListener("click", () => {
+            app.goToHomePage(app.session.isActive, null)
         })
 
         const userBtn = document.querySelector("#userBtn");
@@ -53,6 +57,10 @@ export default class NavBar extends Component {
         document.querySelector("#logoutBtn").addEventListener("click", () => {
             authenticator.logout(app)
             app.goToHomePage(app.session.isActive)
+        })
+
+        document.querySelector("#cartMenuBtn").addEventListener("click", () => {
+            app.goToCartPage(app.session.isActive)
         })
     }
 }

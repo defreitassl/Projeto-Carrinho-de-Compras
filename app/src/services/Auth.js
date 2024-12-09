@@ -1,5 +1,6 @@
 import Database from '../database/Database.js'
 import User from '../entities/User.js'
+import Cart from '../entities/Cart.js'
 
 export default class Auth {
 
@@ -8,6 +9,7 @@ export default class Auth {
     async login (app, email, password) {
         try {
             const user = await Database.users.getUserByEmail(email)
+            const userCart = await Database.carts.getOne(user.cartId)
             
             if (user) {
                 if (password === user.password) {
@@ -20,7 +22,13 @@ export default class Auth {
                         user.cartId,
                         user.orders
                     )
-                    app.session.initSession(currentUser)
+                    const currentCart = new Cart(
+                        userCart.id,
+                        userCart.owner,
+                        userCart.products,
+                        userCart.totalPrice
+                    )
+                    app.session.initSession(currentUser, currentCart)
                 } else {
                     return "Senha incorreta. Tente novamente."
                 }
@@ -35,11 +43,13 @@ export default class Auth {
     async register (app, isSeller, name, email, password) {
         try {
             const newUser = new User(null, isSeller, name, email, password, null, null)
+            const newCart = new Cart(newUser.cartId, newUser.id)
 
-            const response = await Database.users.send(newUser)
+            const responseUser = await Database.users.send(newUser)
+            const responseCart = await Database.carts.send(newCart)
 
-            if (response.status === "OK") {
-                app.session.initSession(newUser)
+            if (responseUser.status === "OK" && responseCart.status === "OK") {
+                app.session.initSession(newUser, newCart)
                 return response
             } else {
                 return response
@@ -49,7 +59,14 @@ export default class Auth {
         }
     }
 
+    async addProductToCartDb (cart, productId) {
+        try {
+            const response = await Database.carts.addProduct(cart.id, productId)
+        } catch (error) {}
+    }
+
     logout (app) {
         app.session.endSession()
     }
+
 }
