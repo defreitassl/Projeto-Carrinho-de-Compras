@@ -6,6 +6,7 @@ import LoginPage from "./components/loginPage/LoginPage.js"
 import CartPage from "./components/cartPage/CartPage.js"
 import Session from "./services/Session.js"
 import FakeStoreApi from "./services/FakeStoreApi.js"
+import Database from "./database/Database.js"
 
 export default class App {
     constructor() {
@@ -41,6 +42,7 @@ export default class App {
         this.isOnCartPage = true // Marcamos como na página de carrinho
         this.cartPage = new CartPage()
         this.cartPage.renderScreen()
+        this.fetchCartProducts()
         this.cartPage.addEventListeners(this.authenticator, this)
     }
 
@@ -97,6 +99,13 @@ export default class App {
         }
     }
 
+    async fetchCartProducts () {
+        const productCarts = this.session.currentUserCart.products
+        productCarts.forEach(productId => {
+
+        })
+    }
+
     async getProductByCategory (category) {
         const products = await FakeStoreApi.getProductsByCategory(category)
         this.goToHomePage(this.session.isActive, products)
@@ -111,6 +120,7 @@ export default class App {
 
     async addProductToCart (product) {
         this.session.currentUserCart.addProduct(product)
-        this.authenticator.addProductToCartDb(this.session.currentUserCart, product)
+        const response = await this.authenticator.addProductToCartDb(this.session.currentUserCart, product)
+        console.log(response.message)
     }
 }

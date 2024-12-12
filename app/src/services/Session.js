@@ -24,8 +24,9 @@ export default class Session {
 
     endSession () {
         this.#isActive = false
-        console.log(`A seção de ${this.#currentUser.name} foi encerrada.`)
         this.#currentUser = null
+        this.#currentUserCart = null
+        console.log(`A seção de ${this.#currentUser.name} foi encerrada.`)
     }
 
     get isActive () {

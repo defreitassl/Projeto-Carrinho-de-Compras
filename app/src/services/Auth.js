@@ -62,11 +62,13 @@ export default class Auth {
     async addProductToCartDb (cart, productId) {
         try {
             const response = await Database.carts.addProduct(cart.id, productId)
-        } catch (error) {}
+            return response
+        } catch (error) {
+            throw new Error("Erro ao adicionar produto ao carrinho.")
+        }
     }
 
     logout (app) {
         app.session.endSession()
     }
-
 }
