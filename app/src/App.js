@@ -81,28 +81,23 @@ export default class App {
                     product.description,
                     product.rating.rate
                 )
-                newProduct.addEventListener()
                 newProduct.render()
             })
-
-            const allProducts = document.querySelectorAll(".product-card")
-            allProducts.forEach(product => {
-                product.querySelector(".add-to-cart-btn").addEventListener("click", () => {
-                    
-                    if (this.session.isActive) {
-                        this.addProductToCart(product.getAttribute("id"))
-                    } else {
-                        this.goToLoginPage()
-                    }
-                })
-            })
+            ProductCard.addEventListener(this)
         }
     }
 
     async fetchCartProducts () {
         const productCarts = this.session.currentUserCart.products
-        productCarts.forEach(productId => {
-
+        productCarts.forEach(async (productId) => {
+            const productObj = await FakeStoreApi.getOneProduct(productId.replace("a","").trim())
+            const cartProduct = new CartProduct(
+                productObj.id,
+                productObj.title,
+                productObj.price,
+                productObj.image
+            )
+            cartProduct.render()
         })
     }
 
@@ -113,14 +108,18 @@ export default class App {
 
     async searchProducts (searchValue) {
         const allProducts = await FakeStoreApi.getAllProducts()
-        
         const filteredProducts = allProducts.filter(product => product.title.toLowerCase().includes(searchValue.toLowerCase()))
         this.goToHomePage(this.session.isActive, filteredProducts)
     }
 
     async addProductToCart (product) {
-        this.session.currentUserCart.addProduct(product)
-        const response = await this.authenticator.addProductToCartDb(this.session.currentUserCart, product)
-        console.log(response.message)
+        try {
+            this.session.currentUserCart.addProduct(product)
+            const response = await this.authenticator.addProductToCartDb(this.session.currentUserCart, product)
+            this.homePage.showMessage(response)
+        } catch (error) {
+            console.error('Error adding product to cart:', error)
+            this.homePage.showMessage('Error adding product to cart')
+        }
     }
 }

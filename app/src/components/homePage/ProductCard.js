@@ -34,7 +34,19 @@ export default class ProductCard extends Component {
         console.log(`Conteúdo removido da tag ${this.outerDivTag}`)
     }
 
-    addEventListener () {
-        
+    static addEventListener (app) {
+        const allProducts = document.querySelectorAll(".product-card")
+        allProducts.forEach(product => {
+            const addToCartButton = product.querySelector(".add-to-cart-btn")
+            addToCartButton.addEventListener("click", (event) => {
+                event.preventDefault()
+                const productId = product.getAttribute("id")
+                if (app.session.isActive) {
+                    app.addProductToCart(productId)
+                } else {
+                    app.goToLoginPage()
+                }
+            })
+        })
     }
 }

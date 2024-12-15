@@ -26,7 +26,7 @@ export default class NavBar extends Component {
                     </div>
                 </ul>
             </nav>
-        `)    
+        `)
     }
 
     addEventListener (authenticator, app) {

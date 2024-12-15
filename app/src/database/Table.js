@@ -78,7 +78,8 @@ export default class Table {
             })
 
             if (!response.ok) {
-                throw new Error(`Erro ao atualizar dados de ${this.#entity}: ${response.status} ${response.statusText}`)
+                const errorData = await response.json()
+                throw new Error(`Erro ao atualizar dados de ${this.#entity}: ${response.status} ${response.statusText} - ${errorData.message}`)
             }
 
             const data = await response.json()
@@ -91,7 +92,7 @@ export default class Table {
         } catch (error) {
             return {
                 status: "ERROR",
-                message: `Erro ao atualizar dados de ${this.#entity}: ${error}`
+                message: `Erro ao atualizar dados de ${this.#entity}: ${error.message}`
             }
         }
     }

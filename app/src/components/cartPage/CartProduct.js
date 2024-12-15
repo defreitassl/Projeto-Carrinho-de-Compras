@@ -1,9 +1,9 @@
 import Component from "../Component.js"
 
 export default class CartProduct extends Component {
-    constructor (title, price, imgSrc) {
+    constructor (id, title, price, imgSrc) {
         super(".cart-products-list", `
-                <li class="product-item">
+                <li class="product-item" id="${id}">
                     <div class="cart-product-img">
                         <img src="${imgSrc}" alt="">
                     </div>
@@ -24,5 +24,13 @@ export default class CartProduct extends Component {
         `)
     }
 
-    addEventListener () {}
+    render () {
+        this.container.innerHTML += this.content
+        // console.log(`Conteúdo renderizado na tag ${this.outerDivTag}`)
+    }
+
+    remove () {
+        this.container.innerHTML -= this.content
+        // console.log(`Conteúdo removido da tag ${this.outerDivTag}`)
+    }
 }

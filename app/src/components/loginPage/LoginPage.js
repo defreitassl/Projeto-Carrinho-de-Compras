@@ -65,4 +65,14 @@ export default class LoginPage{
             loginSlider.style.transform = "translateX(0)"
         })
     }
+
+    showMessage (message) {    
+        const alertContainer = document.querySelector("#alert-container")
+        alertContainer.textContent = message
+        alertContainer.classList.add("show")
+
+        setTimeout(() => {
+            alertContainer.classList.remove("show")
+        }, 3000)
+    }
 }

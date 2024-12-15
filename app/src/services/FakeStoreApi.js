@@ -25,9 +25,7 @@ export default class FakeStoreApi {
             if (!response.ok) {
                 throw new Error("Erro ao buscar produto: "+response.status+response.statusText)
             }
-
             const data = await response.json()
-
             return data
         } catch (error) {
             console.log(new Error("Erro ao buscar produto: "+error))

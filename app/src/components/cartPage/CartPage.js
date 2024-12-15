@@ -12,7 +12,7 @@ export default class CartPage {
     renderScreen (app) {
         this.cartProductsSection = new CartProductsSection()
         this.cartResume = new CartResume()
-        
+
         this.navbar.render()
         this.cartProductsSection.render()
         this.cartResume.render()
@@ -28,5 +28,15 @@ export default class CartPage {
         this.navbar.addEventListener(authenticator, app)
         this.cartProductsSection.addEventListener()
         this.cartResume.addEventListener()
+    }
+
+    showMessage (message) {    
+        const alertContainer = document.querySelector("#alert-container")
+        alertContainer.textContent = message
+        alertContainer.classList.add("show")
+
+        setTimeout(() => {
+            alertContainer.classList.remove("show")
+        }, 3000)
     }
 }

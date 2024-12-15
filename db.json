@@ -8,12 +8,27 @@
       "password": "14Douglas$$",
       "cartId": "Ca1",
       "orders": []
+    },
+    {
+      "id": "Di1",
+      "isSeller": false,
+      "name": "Diyg",
+      "email": "cursofletpython@gmail.com",
+      "password": "abc",
+      "cartId": "Ca1",
+      "orders": []
     }
   ],
   "carts": [
     {
       "id": "Ca1",
       "owner": "Do1",
+      "products": [],
+      "totalPrice": 0
+    },
+    {
+      "id": "Ca3",
+      "owner": "Di1",
       "products": [],
       "totalPrice": 0
     }
