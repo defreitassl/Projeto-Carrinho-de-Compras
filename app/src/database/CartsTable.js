@@ -6,17 +6,26 @@ export default class CartsTable extends Table {
     }
 
     async addProduct(idCart, newProductId) {
-    try {
-        const cart = await super.getOne(idCart);
-        if (!cart) {
-            throw new Error(`Cart with id ${idCart} not found`);
+        try {
+            const cart = await super.getOne(idCart)
+
+            if (!cart) {
+                throw new Error(`Cart with id ${idCart} not found`)
+            }
+
+            const productsInCart = [...cart.products]
+            const existingProductIndex = productsInCart.findIndex(product => product.id === newProductId)
+
+            if (existingProductIndex !== -1) {
+                productsInCart[existingProductIndex].quantity = Number(productsInCart[existingProductIndex].quantity) + 1
+            } else {
+                productsInCart.push({ id: newProductId, quantity: 1 })
+            }
+
+            return await super.update(idCart, {products: productsInCart})
+        } catch (error) {
+            console.error(error)
+            throw error
         }
-        const productsInCart = [...cart.products, newProductId];
-        const updateCart = await super.update(idCart, { products: productsInCart });
-        return updateCart;
-    } catch (error) {
-        console.error(error);
-        throw error;
-    }
     }
 }

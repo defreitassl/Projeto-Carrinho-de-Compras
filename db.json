@@ -23,7 +23,24 @@
     {
       "id": "Ca1",
       "owner": "Do1",
-      "products": [],
+      "products": [
+        {
+          "id": "a1",
+          "quantity": 10
+        },
+        {
+          "id": "a2",
+          "quantity": 4
+        },
+        {
+          "id": "a5",
+          "quantity": 1
+        },
+        {
+          "id": "a14",
+          "quantity": 1
+        }
+      ],
       "totalPrice": 0
     },
     {

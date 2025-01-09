@@ -1,5 +1,6 @@
 import CartProductsSection from "./CartProductsSection.js"
 import CartResume from "./CartResume.js"
+import CartMessage from "./CartMessage.js"
 import NavBar from "../NavBar.js"
 
 export default class CartPage {
@@ -7,15 +8,20 @@ export default class CartPage {
         this.navbar = new NavBar()
         this.cartProductsSection = new CartProductsSection()
         this.cartResume = new CartResume()
+        this.cartMessage = new CartMessage()
     }
 
     renderScreen (app) {
-        this.cartProductsSection = new CartProductsSection()
-        this.cartResume = new CartResume()
+        if (app.session.currentUserCart.products.length > 0) {
+            this.cartProductsSection = new CartProductsSection()
+            this.cartResume = new CartResume()
+            this.cartProductsSection.render()
+            this.cartResume.render()
+        } else {
+            this.cartMessage.render()
+        }
 
         this.navbar.render()
-        this.cartProductsSection.render()
-        this.cartResume.render()
     }
 
     cleanScreen () {

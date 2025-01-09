@@ -6,7 +6,6 @@ import LoginPage from "./components/loginPage/LoginPage.js"
 import CartPage from "./components/cartPage/CartPage.js"
 import Session from "./services/Session.js"
 import FakeStoreApi from "./services/FakeStoreApi.js"
-import Database from "./database/Database.js"
 
 export default class App {
     constructor() {
@@ -41,7 +40,7 @@ export default class App {
         this.isOnHomePage = false
         this.isOnCartPage = true // Marcamos como na página de carrinho
         this.cartPage = new CartPage()
-        this.cartPage.renderScreen()
+        this.cartPage.renderScreen(this)
         this.fetchCartProducts()
         this.cartPage.addEventListeners(this.authenticator, this)
     }
@@ -89,15 +88,17 @@ export default class App {
 
     async fetchCartProducts () {
         const productCarts = this.session.currentUserCart.products
-        productCarts.forEach(async (productId) => {
-            const productObj = await FakeStoreApi.getOneProduct(productId.replace("a","").trim())
+        productCarts.forEach(async (product) => {
+            const productObj = await FakeStoreApi.getOneProduct(product.id.replace("a","").trim())
             const cartProduct = new CartProduct(
                 productObj.id,
                 productObj.title,
                 productObj.price,
-                productObj.image
+                productObj.image,
+                product.quantity
             )
             cartProduct.render()
+            CartProduct.addEventListener(this)
         })
     }
 
@@ -118,8 +119,8 @@ export default class App {
             const response = await this.authenticator.addProductToCartDb(this.session.currentUserCart, product)
             this.homePage.showMessage(response)
         } catch (error) {
-            console.error('Error adding product to cart:', error)
-            this.homePage.showMessage('Error adding product to cart')
+            console.error('Erro ao adicionar produto ao carrinho:', error)
+            this.homePage.showMessage('Erro ao adicionar produto ao carrinho:')
         }
     }
 }

@@ -45,22 +45,26 @@ export default class NavBar extends Component {
         const dropdownMenu = document.querySelector(".dropdown-menu");
 
         userBtn.addEventListener("click", (event) => {
-            dropdownMenu.style.display = dropdownMenu.style.display === "block" ? "none" : "block";
+            dropdownMenu.style.display = dropdownMenu.style.display === "block" ? "none" : "block"
         })
 
         document.addEventListener("click", (event) => {
             if (!userBtn.contains(event.target) && !dropdownMenu.contains(event.target)) {
-                dropdownMenu.style.display = "none";
+                dropdownMenu.style.display = "none"
             }
         })
 
         document.querySelector("#logoutBtn").addEventListener("click", () => {
             authenticator.logout(app)
-            app.goToHomePage(app.session.isActive)
+            app.goToHomePage(app.session.isActive, null)
         })
 
         document.querySelector("#cartMenuBtn").addEventListener("click", () => {
-            app.goToCartPage(app.session.isActive)
+            if (app.session.isActive) {
+                app.goToCartPage(app.session.isActive)
+            } else {
+                app.goToLoginPage()
+            }
         })
     }
 }

@@ -62,13 +62,25 @@ export default class Auth {
     async addProductToCartDb (cart, productId) {
         try {
             const response = await Database.carts.addProduct(cart.id, productId)
+
             if (response.status === "OK") {
-                return { success: true, message: "Produto adicionado ao carrinho com sucesso." }
+                return "Produto adicionado ao carrinho com sucesso." 
             } else {
-                return { success: false, message: "Erro ao adicionar produto ao carrinho." }
-            }   
+                return "Erro ao adicionar produto ao carrinho." 
+            }
+            
         } catch (error) {
             throw new Error(`Erro ao adicionar produto ao carrinho: ${error.message}`)
+        }
+    }
+
+    async updateCartInfo (app, cart) {
+        try {
+            const response = await Database.carts.update(cart.id, cart)
+            console.log(response.data)
+
+        } catch (error) {
+            throw new Error("Erro inesperado ao atualizar informações do carrinho: " + error)
         }
     }
 
