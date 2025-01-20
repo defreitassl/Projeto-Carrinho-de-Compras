@@ -41,8 +41,9 @@ export default class ProductCard extends Component {
             addToCartButton.addEventListener("click", (event) => {
                 event.preventDefault()
                 const productId = product.getAttribute("id")
+                const price = Number(product.querySelector(".price").innerText.replace("R$", "").replace(",", "."))
                 if (app.session.isActive) {
-                    app.addProductToCart(productId)
+                    app.addProductToCart(productId, price)
                 } else {
                     app.goToLoginPage()
                 }

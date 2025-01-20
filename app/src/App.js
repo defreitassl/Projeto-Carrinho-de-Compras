@@ -113,10 +113,10 @@ export default class App {
         this.goToHomePage(this.session.isActive, filteredProducts)
     }
 
-    async addProductToCart (product) {
+    async addProductToCart (productId, price) {
         try {
-            this.session.currentUserCart.addProduct(product)
-            const response = await this.authenticator.addProductToCartDb(this.session.currentUserCart, product)
+            this.session.currentUserCart.addProduct(productId, price)
+            const response = await this.authenticator.addProductToCartDb(this.session.currentUserCart, productId, price)
             this.homePage.showMessage(response)
         } catch (error) {
             console.error('Erro ao adicionar produto ao carrinho:', error)

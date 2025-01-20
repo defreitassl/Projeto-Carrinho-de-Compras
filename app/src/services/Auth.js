@@ -59,9 +59,9 @@ export default class Auth {
         }
     }
 
-    async addProductToCartDb (cart, productId) {
+    async addProductToCartDb (cart, productId, price) {
         try {
-            const response = await Database.carts.addProduct(cart.id, productId)
+            const response = await Database.carts.addProduct(cart.id, productId, price)
 
             if (response.status === "OK") {
                 return "Produto adicionado ao carrinho com sucesso." 

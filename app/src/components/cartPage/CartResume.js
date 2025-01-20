@@ -1,18 +1,28 @@
-import Component from "../Component.js"
+import Component from "../Component.js";
 
 export default class CartResume extends Component {
-    constructor (productsNum, subTotal, total) {
+    constructor(cart) {
+        // Calcula o número total de produtos (somando as quantidades)
+        const productsNum = cart.products.reduce((acc, product) => acc + product.quantity, 0)
+
+        // Calcula o subtotal (preço * quantidade de cada produto)
+        console.log(cart.products)
+        const subTotal = cart.products.reduce((acc, product) => acc + (product.price * product.quantity), 0)
+
+        const total = subTotal
+
         super(".cart-inner-container", `
             <div class="cart-resume">
                 <h2>Resumo da Compra</h2>
                 <div class="cart-resume-info">
                     <p class="cart-resume-quantity">Produtos: <strong>${productsNum}</strong></p>
-                    <p class="cart-resume-subtotal">Subtotal: <strong>R$ ${subTotal}</strong></p>
+                    <p class="cart-resume-subtotal">Subtotal: <strong>R$ ${subTotal.toFixed(2)}</strong></p>
                     <p class="cart-resume-discount">Desconto: <strong>R$ 0,00</strong></p>
                 </div>
                 <div class="cart-resume-button">
-                    <p class="cart-resume-total">Total: <strong>R$ ${total}</strong></p>
-                    <button class="checkout-button">Finalizar Compra</button>
+                    <p class="cart-resume-total">Total: <strong>R$ ${total.toFixed(2)}</strong></p>
+                    <button class="checkout-button">Finalizar Compra</
+                    </button>
                 </div>
             </div>
         `)

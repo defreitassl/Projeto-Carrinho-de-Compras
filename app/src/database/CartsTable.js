@@ -5,7 +5,7 @@ export default class CartsTable extends Table {
         super("carts")
     }
 
-    async addProduct(idCart, newProductId) {
+    async addProduct(idCart, newProductId, price) {
         try {
             const cart = await super.getOne(idCart)
 
@@ -19,7 +19,7 @@ export default class CartsTable extends Table {
             if (existingProductIndex !== -1) {
                 productsInCart[existingProductIndex].quantity = Number(productsInCart[existingProductIndex].quantity) + 1
             } else {
-                productsInCart.push({ id: newProductId, quantity: 1 })
+                productsInCart.push({ id: newProductId, quantity: 1, price: price })
             }
 
             return await super.update(idCart, {products: productsInCart})
