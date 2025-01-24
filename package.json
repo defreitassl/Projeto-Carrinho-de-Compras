@@ -6,7 +6,8 @@
     "test": "node ./app/src/index.js",
     "db": "json-server --watch db.json --port 3000",
     "pack": "npx webpack",
-    "start": "webpack-dev-server"
+    "start": "webpack-dev-server",
+    "build": "webpack"
   },
   "keywords": [],
   "author": "Douglas Freitas",
@@ -20,6 +21,7 @@
     "@babel/preset-env": "^7.26.0",
     "babel-loader": "^9.2.1",
     "css-loader": "^7.1.2",
+    "html-webpack-plugin": "^5.6.3",
     "mini-css-extract-plugin": "^2.9.2",
     "webpack": "^5.96.1",
     "webpack-cli": "^5.1.4",

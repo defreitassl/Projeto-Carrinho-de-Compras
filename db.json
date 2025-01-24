@@ -5,7 +5,7 @@
       "isSeller": false,
       "name": "Douglas Freitas",
       "email": "douglasamf14@gmail.com",
-      "password": "14Douglas$$",
+      "password": "aaa",
       "cartId": "Ca1",
       "orders": []
     },
@@ -26,13 +26,8 @@
       "products": [
         {
           "id": "a7",
-          "quantity": 2,
+          "quantity": 1,
           "price": 9.99
-        },
-        {
-          "id": "a3",
-          "quantity": 6,
-          "price": 55.99
         },
         {
           "id": "a13",

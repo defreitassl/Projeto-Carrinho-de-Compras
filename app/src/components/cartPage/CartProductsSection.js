@@ -13,14 +13,18 @@ export default class CartProductsSection extends Component {
     }
 
     render () {
-        this.container.innerHTML += this.content
-        // console.log(`Conteúdo renderizado na tag ${this.outerDivTag}`)
+        console.log("Rendering Cart Products Section..."); // Debugging log
+        this.container.innerHTML += this.content;
     }
 
     remove () {
-        this.container.innerHTML -= this.content
-        // console.log(`Conteúdo removido da tag ${this.outerDivTag}`)
+        console.log("Removing Cart Products Section..."); // Debugging log
+        this.container.innerHTML = this.container.innerHTML.replace(this.content, '');
+        console.log(`Conteúdo removido da tag ${this.outerDivTag}`);
     }
 
-    addEventListener () {}
+    addEventListener () {
+        // Implement event listeners for cart product interactions here
+        console.log("Event listeners added for cart products.");
+    }
 }

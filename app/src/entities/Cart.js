@@ -21,29 +21,36 @@ export default class Cart {
 
     addProduct(productId, price) {
         const productsInCart = [...this.#products]
-        console.log(this.#products)
         const existingProductIndex = productsInCart.findIndex(product => product.id === productId)
 
         if (existingProductIndex !== -1) {
             productsInCart[existingProductIndex].quantity = Number(productsInCart[existingProductIndex].quantity) + 1
         } else {
-            productsInCart.push({ id: productId, quantity: 1, price: price }) // Adiciona o preço ao produto
+            productsInCart.push({ id: productId, quantity: 1, price: price })
         }
         this.#products = productsInCart
     }
 
-    updateProductQuantity(productId, quantity) {
-        const productsInCart = [...this.#products]
-        const existingProductIndex = productsInCart.findIndex(product => product.id === productId)
-
+    async updateProductQuantity(app, productId, quantity) {
+        console.log(`Updating quantity for product ID: ${productId}, New Quantity: ${quantity}`); // Debugging log
+        console.log(`Current products in cart: ${JSON.stringify(this.#products)}`); // Debugging log
+        const productsInCart = [...this.#products];
+        const existingProductIndex = productsInCart.findIndex(product => product.id === `a${productId}`);
+    
         if (existingProductIndex !== -1) {
-            productsInCart[existingProductIndex].quantity = quantity
+            if (quantity > 0) {
+                productsInCart[existingProductIndex].quantity = quantity;
+            } else {
+                productsInCart.splice(existingProductIndex, 1); // Remove product if quantity is 0
+            }
         } else {
-            throw new Error('Produto não encontrado no carrinho.')
+            console.error('Produto não encontrado no carrinho.'); // Error log
+            throw new Error('Produto não encontrado no carrinho.');
         }
-
-        this.#products = productsInCart
+    
+        this.#products = productsInCart;
     }
+    
 
     toJSON() {
         return {

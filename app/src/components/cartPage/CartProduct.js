@@ -27,44 +27,46 @@ export default class CartProduct extends Component {
 
     render () {
         this.container.innerHTML += this.content
-        // console.log(`Conteúdo renderizado na tag ${this.outerDivTag}`)
     }
 
-    remove () {
-        this.container.innerHTML -= this.content
-        // console.log(`Conteúdo removido da tag ${this.outerDivTag}`)
-    }
-
-    static addEventListener(app) {
+    static async addEventListener(app) {
         const minusButtons = document.querySelectorAll(".minus-button");
         const plusButtons = document.querySelectorAll(".plus-button");
+        const removeButtons = document.querySelectorAll(".remove-button")
     
         minusButtons.forEach(button => {
-            button.addEventListener("click", (event) => {
-                const productItem = event.target.closest(".product-item"); // Encontra o item do produto
-                const id = productItem.id; // Obtém o ID do produto
-                const quantityInput = event.target.nextElementSibling;
-                let quantity = parseInt(quantityInput.innerText);
-                if (quantity > 1) {
-                    quantity--;
-                    quantityInput.innerText = quantity;
-                    app.session.currentUserCart.updateProductQuantity(id, quantity); // Usa o ID correto
-                    app.authenticator.updateCartInfo(app, app.session.currentUserCart.toJSON());
-                }
+            button.addEventListener("click", async (event) => {
+                const productItem = event.target.closest(".product-item")
+                const id = productItem.id
+                const quantityInput = event.target.nextElementSibling
+                let quantity = parseInt(quantityInput.innerText)
+                quantity--
+                quantityInput.innerText = quantity
+                app.session.currentUserCart.updateProductQuantity(app, id, quantity)
+                await app.authenticator.updateCartInfo(app, app.session.currentUserCart.toJSON())
+                app.goToCartPage()
             })
         })
     
         plusButtons.forEach(button => {
-            button.addEventListener("click", (event) => {
-                const productItem = event.target.closest(".product-item"); // Encontra o item do produto
-                const id = productItem.id; // Obtém o ID do produto
-                const quantityInput = event.target.previousElementSibling;
-                let quantity = parseInt(quantityInput.innerText);
-                quantity++;
-                quantityInput.innerText = quantity;
-                app.session.currentUserCart.updateProductQuantity(id, quantity); // Usa o ID correto
-                app.authenticator.updateCartInfo(app, app.session.currentUserCart.toJSON());
+            button.addEventListener("click", async (event) => {
+                const productItem = event.target.closest(".product-item")
+                const id = productItem.id
+                const quantityInput = event.target.previousElementSibling
+                let quantity = parseInt(quantityInput.innerText)
+                quantity++
+                quantityInput.innerText = quantity
+                app.session.currentUserCart.updateProductQuantity(app, id, quantity)
+                await app.authenticator.updateCartInfo(app, app.session.currentUserCart.toJSON())
+                app.goToCartPage()
             });
         });
+
+        removeButtons.forEach(button => {
+            button.addEventListener("click", async (event) => {
+                const productItem = event.target.closest(".product-item")
+                const id = productItem.id
+            })
+        })
     }
 }

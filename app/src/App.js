@@ -13,7 +13,7 @@ export default class App {
         this.homePage = new HomePage()
         this.loginPage = null
         this.cartPage = null
-        this.isOnHomePage = false  // Flag para monitorar se estamos na página inicial
+        this.isOnHomePage = false
         this.isOnCartPage = false
         this.session = new Session()
     }
@@ -27,7 +27,7 @@ export default class App {
 
     goToHomePage(userLogged, products=false) {
         this.cleanScreen()
-        this.isOnHomePage = true  // Marcamos como na página inicial
+        this.isOnHomePage = true
         this.isOnCartPage = false
         this.homePage = new HomePage()
         this.homePage.renderScreen(userLogged)
@@ -38,7 +38,7 @@ export default class App {
     goToCartPage() {
         this.cleanScreen()
         this.isOnHomePage = false
-        this.isOnCartPage = true // Marcamos como na página de carrinho
+        this.isOnCartPage = true
         this.cartPage = new CartPage()
         this.cartPage.renderScreen(this)
         this.fetchCartProducts()
@@ -69,7 +69,6 @@ export default class App {
             productsList = await FakeStoreApi.getAllProducts()
         }
 
-        // Renderizar apenas se ainda estivermos na página inicial
         if (this.isOnHomePage) {
             productsList.forEach(product => {
                 const newProduct = new ProductCard(
@@ -87,8 +86,9 @@ export default class App {
     }
 
     async fetchCartProducts () {
+        console.log("Fetching cart products..."); // Debugging log
         const productCarts = this.session.currentUserCart.products
-        productCarts.forEach(async (product) => {
+        for (const product of productCarts) {
             const productObj = await FakeStoreApi.getOneProduct(product.id.replace("a","").trim())
             const cartProduct = new CartProduct(
                 productObj.id,
@@ -99,7 +99,7 @@ export default class App {
             )
             cartProduct.render()
             CartProduct.addEventListener(this)
-        })
+        }
     }
 
     async getProductByCategory (category) {
