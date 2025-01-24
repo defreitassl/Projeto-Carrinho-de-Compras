@@ -26,8 +26,13 @@
       "products": [
         {
           "id": "a6",
-          "quantity": 1,
+          "quantity": 3,
           "price": 168
+        },
+        {
+          "id": "a2",
+          "quantity": 4,
+          "price": 22.3
         }
       ],
       "totalPrice": 0

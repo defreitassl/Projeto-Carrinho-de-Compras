@@ -48,6 +48,18 @@ export default class ProductCard extends Component {
                     app.goToLoginPage()
                 }
             })
+
+            const buyButton = product.querySelector(".buy-button")
+            buyButton.addEventListener("click", (event) => {
+                event.preventDefault()
+                const productId = product.getAttribute("id")
+                const price = Number(product.querySelector(".price").innerText.replace("R$", "").replace(",", "."))
+                if (app.session.isActive) {
+                    app.addProductToCart(productId, price)
+                } else {
+                    app.goToLoginPage()
+                }
+            })
         })
     }
 }
