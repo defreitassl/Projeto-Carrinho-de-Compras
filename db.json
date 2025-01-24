@@ -25,14 +25,9 @@
       "owner": "Do1",
       "products": [
         {
-          "id": "a7",
+          "id": "a6",
           "quantity": 1,
-          "price": 9.99
-        },
-        {
-          "id": "a13",
-          "quantity": 1,
-          "price": 599
+          "price": 168
         }
       ],
       "totalPrice": 0

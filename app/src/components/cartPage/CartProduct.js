@@ -42,7 +42,7 @@ export default class CartProduct extends Component {
                 let quantity = parseInt(quantityInput.innerText)
                 quantity--
                 quantityInput.innerText = quantity
-                app.session.currentUserCart.updateProductQuantity(app, id, quantity)
+                app.session.currentUserCart.updateProductQuantity(id, quantity)
                 await app.authenticator.updateCartInfo(app, app.session.currentUserCart.toJSON())
                 app.goToCartPage()
             })
@@ -56,7 +56,7 @@ export default class CartProduct extends Component {
                 let quantity = parseInt(quantityInput.innerText)
                 quantity++
                 quantityInput.innerText = quantity
-                app.session.currentUserCart.updateProductQuantity(app, id, quantity)
+                app.session.currentUserCart.updateProductQuantity(id, quantity)
                 await app.authenticator.updateCartInfo(app, app.session.currentUserCart.toJSON())
                 app.goToCartPage()
             });
@@ -65,7 +65,10 @@ export default class CartProduct extends Component {
         removeButtons.forEach(button => {
             button.addEventListener("click", async (event) => {
                 const productItem = event.target.closest(".product-item")
-                const id = productItem.id
+                productItem.remove()
+                app.session.currentUserCart.updateProductQuantity(productItem.id, 0)
+                await app.authenticator.updateCartInfo(app, app.session.currentUserCart.toJSON())
+                app.goToCartPage()
             })
         })
     }

@@ -31,9 +31,7 @@ export default class Cart {
         this.#products = productsInCart
     }
 
-    async updateProductQuantity(app, productId, quantity) {
-        console.log(`Updating quantity for product ID: ${productId}, New Quantity: ${quantity}`); // Debugging log
-        console.log(`Current products in cart: ${JSON.stringify(this.#products)}`); // Debugging log
+    async updateProductQuantity(productId, quantity) {
         const productsInCart = [...this.#products];
         const existingProductIndex = productsInCart.findIndex(product => product.id === `a${productId}`);
     
@@ -44,7 +42,7 @@ export default class Cart {
                 productsInCart.splice(existingProductIndex, 1); // Remove product if quantity is 0
             }
         } else {
-            console.error('Produto não encontrado no carrinho.'); // Error log
+            console.error('Produto não encontrado no carrinho.');
             throw new Error('Produto não encontrado no carrinho.');
         }
     
