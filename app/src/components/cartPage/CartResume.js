@@ -1,7 +1,7 @@
 import Component from "../Component.js";
 
 export default class CartResume extends Component {
-    constructor(cart) {
+    constructor(cart, app) {
         // Calcula o número total de produtos (somando as quantidades)
         const productsNum = cart.products.reduce((acc, product) => acc + product.quantity, 0)
 
@@ -26,6 +26,9 @@ export default class CartResume extends Component {
                 </div>
             </div>
         `)
+
+        this.cart = cart
+        this.app = app
     }
 
     render () {
@@ -38,5 +41,13 @@ export default class CartResume extends Component {
         // console.log(`Conteúdo removido da tag ${this.outerDivTag}`)
     }
 
-    addEventListener () {}
+    addEventListener() {
+        const checkoutButton = document.querySelector(".checkout-button");
+        checkoutButton.addEventListener("click", () => {
+            this.cart.clearCart()
+            this.app.authenticator.updateCartInfo(this.app, this.cart)
+            this.app.cartPage.showMessage("Compra realizada com sucesso!");
+            this.app.goToCartPage();
+        });
+    }
 }

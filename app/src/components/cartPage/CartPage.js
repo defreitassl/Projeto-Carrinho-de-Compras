@@ -8,17 +8,16 @@ export default class CartPage {
         this.navbar = new NavBar();
         this.cartProductsSection = new CartProductsSection();
         this.cartResume = null;
-        this.cartMessage = new CartMessage();
+        this.cartMessage = null;
     }
 
     renderScreen(app) {
-        console.log("Rendering Cart Page..."); // Debugging log
-        console.log("Current cart products:", app.session.currentUserCart.products); // Debugging log
         if (app.session.currentUserCart.products.length > 0) {
-            this.cartResume = new CartResume(app.session.currentUserCart);
+            this.cartResume = new CartResume(app.session.currentUserCart, app);
             this.cartProductsSection.render();
             this.cartResume.render();
         } else {
+            this.cartMessage = new CartMessage();
             this.cartMessage.render();
         }
         this.navbar.render();
@@ -28,12 +27,13 @@ export default class CartPage {
         this.navbar.remove();
         this.cartProductsSection.remove();
         if (this.cartResume) this.cartResume.remove();
+        if (this.cartMessage) this.cartMessage.remove();
     }
 
     addEventListeners(authenticator, app) {
         this.navbar.addEventListener(authenticator, app);
         this.cartProductsSection.addEventListener();
-        if (this.cartResume) this.cartResume.addEventListener(); // Add listeners if it exists
+        if (this.cartResume) this.cartResume.addEventListener();
     }
 
     showMessage(message) {    

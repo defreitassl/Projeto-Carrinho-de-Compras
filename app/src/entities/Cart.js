@@ -49,6 +49,10 @@ export default class Cart {
         this.#products = productsInCart;
     }
     
+    clearCart() {
+        this.#products = [];
+        this.#totalPrice = 0;
+    }
 
     toJSON() {
         return {
