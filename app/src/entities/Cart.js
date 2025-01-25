@@ -33,11 +33,12 @@ export default class Cart {
 
     async updateProductQuantity(productId, quantity) {
         const productsInCart = [...this.#products];
-        const existingProductIndex = productsInCart.findIndex(product => product.id === `a${productId}`);
+        const formattedProductId = productId.startsWith('a') ? productId : `a${productId}`;
+        const existingProductIndex = productsInCart.findIndex(product => product.id === formattedProductId);
     
         if (existingProductIndex !== -1) {
             if (quantity > 0) {
-                productsInCart[existingProductIndex].quantity = quantity;
+                productsInCart[existingProductIndex].quantity = Number(quantity); // Converte a quantidade para número
             } else {
                 productsInCart.splice(existingProductIndex, 1); // Remove product if quantity is 0
             }

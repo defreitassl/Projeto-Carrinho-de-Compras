@@ -17,10 +17,13 @@ export default class HomePage {
         this.categories = new Categories()
         this.products = new ProductsSection()
         
-        this.navbar.render() // render the navbar
+        this.navbar.render()
         !userLogged ? this.hero.render() : console.log("Usuário já está logado | Hero Section nao será renderizado") // render the hero section case the user is not logged
-        this.categories.render() // render the categories section
-        this.products.render() // render the products section
+        this.categories.render()
+        this.products.render()
+
+        const cartContainer = document.querySelector(".cart-inner-container");
+        cartContainer.style.display = "none";
     }
 
     cleanScreen () {

@@ -85,21 +85,26 @@ export default class App {
         }
     }
 
-    async fetchCartProducts () {
-        console.log("Fetching cart products..."); // Debugging log
-        const productCarts = this.session.currentUserCart.products
+    async fetchCartProducts() {
+        const productCarts = this.session.currentUserCart.products;
+    
+        const cartProductsList = document.querySelector(".cart-products-list");
+        if (cartProductsList) {
+            cartProductsList.innerHTML = ""
+        }
+
         for (const product of productCarts) {
-            const productObj = await FakeStoreApi.getOneProduct(product.id.replace("a","").trim())
+            const productObj = await FakeStoreApi.getOneProduct(product.id.replace("a", "").trim());
             const cartProduct = new CartProduct(
                 productObj.id,
                 productObj.title,
-                productObj.price,
+                Number(productObj.price),
                 productObj.image,
-                product.quantity
-            )
-            cartProduct.render()
-            CartProduct.addEventListener(this)
+                Number(product.quantity)
+            );
+            cartProduct.render();
         }
+        CartProduct.addEventListener(this);
     }
 
     async getProductByCategory (category) {

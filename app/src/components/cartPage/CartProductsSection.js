@@ -13,14 +13,11 @@ export default class CartProductsSection extends Component {
     }
 
     render () {
-        console.log("Rendering Cart Products Section..."); // Debugging log
         this.container.innerHTML += this.content;
     }
 
     remove () {
-        console.log("Removing Cart Products Section..."); // Debugging log
         this.container.innerHTML = this.container.innerHTML.replace(this.content, '');
-        console.log(`Conteúdo removido da tag ${this.outerDivTag}`);
     }
 
     addEventListener () {

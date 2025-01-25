@@ -3,13 +3,12 @@ import Component from "../Component.js";
 export default class CartResume extends Component {
     constructor(cart, app) {
         // Calcula o número total de produtos (somando as quantidades)
-        const productsNum = cart.products.reduce((acc, product) => acc + product.quantity, 0)
+    const productsNum = cart.products.reduce((acc, product) => acc + Number(product.quantity), 0);
 
-        // Calcula o subtotal (preço * quantidade de cada produto)
-        console.log(cart.products)
-        const subTotal = cart.products.reduce((acc, product) => acc + (product.price * product.quantity), 0)
+    // Calcula o subtotal (preço * quantidade de cada produto)
+    const subTotal = cart.products.reduce((acc, product) => acc + (Number(product.price) * Number(product.quantity)), 0);
 
-        const total = subTotal
+    const total = subTotal;
 
         super(".cart-inner-container", `
             <div class="cart-resume">
@@ -37,7 +36,7 @@ export default class CartResume extends Component {
     }
 
     remove () {
-        this.container.innerHTML -= this.content
+        this.container.innerHTML = ""
         // console.log(`Conteúdo removido da tag ${this.outerDivTag}`)
     }
 

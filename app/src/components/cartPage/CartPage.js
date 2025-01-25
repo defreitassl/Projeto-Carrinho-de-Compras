@@ -16,9 +16,13 @@ export default class CartPage {
             this.cartResume = new CartResume(app.session.currentUserCart, app);
             this.cartProductsSection.render();
             this.cartResume.render();
+            const cartContainer = document.querySelector(".cart-inner-container");
+            cartContainer.style.display = "flex";
         } else {
             this.cartMessage = new CartMessage();
             this.cartMessage.render();
+            const cartContainer = document.querySelector(".cart-inner-container");
+            cartContainer.style.display = "flex";
         }
         this.navbar.render();
     }

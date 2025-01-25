@@ -6,9 +6,11 @@ export default class LoginPage{
     }
 
     renderScreen() {
-        this.loginContainer.container.style.width = "100vw"
-        this.loginContainer.container.style.height = "100vh"
-        this.loginContainer.render()
+        this.loginContainer.container.style.width = "100vw";
+        this.loginContainer.container.style.height = "100vh";
+        this.loginContainer.render();
+        const cartContainer = document.querySelector(".cart-inner-container");
+        cartContainer.style.display = "none";
     }
 
     cleanScreen() {
