@@ -37,12 +37,13 @@ export default class CartResume extends Component {
     }
 
     addEventListener() {
-        const checkoutButton = document.querySelector(".checkout-button");
+        const checkoutButton = document.querySelector(".checkout-button")
         checkoutButton.addEventListener("click", () => {
+            this.app.createOrder(this.cart)
             this.cart.clearCart()
             this.app.authenticator.updateCartInfo(this.app, this.cart)
-            this.app.cartPage.showMessage("Compra realizada com sucesso!");
-            this.app.goToCartPage();
-        });
+            this.app.cartPage.showMessage("Compra realizada com sucesso!")
+            this.app.goToCartPage()
+        })
     }
 }

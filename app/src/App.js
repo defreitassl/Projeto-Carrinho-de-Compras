@@ -5,6 +5,7 @@ import HomePage from "./components/homePage/HomePage.js"
 import LoginPage from "./components/loginPage/LoginPage.js"
 import CartPage from "./components/cartPage/CartPage.js"
 import Session from "./services/Session.js"
+import Order from "./entities/Order.js"
 import FakeStoreApi from "./services/FakeStoreApi.js"
 
 export default class App {
@@ -127,5 +128,10 @@ export default class App {
             console.error('Erro ao adicionar produto ao carrinho:', error)
             this.homePage.showMessage('Erro ao adicionar produto ao carrinho:')
         }
+    }
+
+    async createOrder(cart) {
+        const newOrder = new Order(this.session.currentUser.id, cart.products, cart.totalPrice)
+        this.authenticator.registerOrder(newOrder)
     }
 }

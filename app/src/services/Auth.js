@@ -77,8 +77,41 @@ export default class Auth {
     async updateCartInfo (app, cart) {
         try {
             const response = await Database.carts.update(cart.id, cart)
+
+            if (response.status === "OK") {
+                return "Carrinho atualizado com sucesso." 
+            } else {
+                return "Erro ao atualizar carrinho." 
+            }
+
         } catch (error) {
             throw new Error("Erro inesperado ao atualizar informações do carrinho: " + error)
+        }
+    }
+
+    async registerOrder (order) {
+        try {
+            const responseOrder = await Database.orders.send(order)
+
+            if (responseOrder.status === "OK") {
+                let currentUserOrders = await Database.users.getOne(order.customer)
+                .then((user) => {
+                    return user.orders
+                })
+
+                if (currentUserOrders.length > 0) {
+                    currentUserOrders.push(order.id)
+                } else {
+                    currentUserOrders = order.id
+                }
+
+                const responseUser = await Database.users.update(order.customer, { orders: [currentUserOrders] })
+            } else {
+                return "Erro ao registrar pedido."
+            }
+            
+            } catch (error) {
+            throw new Error("Erro inesperado ao registrar pedido: " + error)
         }
     }
 
