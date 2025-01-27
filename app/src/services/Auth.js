@@ -77,7 +77,6 @@ export default class Auth {
     async updateCartInfo (app, cart) {
         try {
             const response = await Database.carts.update(cart.id, cart)
-            console.log(response.data)
         } catch (error) {
             throw new Error("Erro inesperado ao atualizar informações do carrinho: " + error)
         }

@@ -19,6 +19,10 @@ export default class Cart {
         return this.#products
     }
 
+    get totalPrice() {
+        return this.#totalPrice
+    }
+
     addProduct(productId, price) {
         const productsInCart = [...this.#products]
         const existingProductIndex = productsInCart.findIndex(product => product.id === productId)
@@ -29,6 +33,7 @@ export default class Cart {
             productsInCart.push({ id: productId, quantity: 1, price: price })
         }
         this.#products = productsInCart
+        this.#updateTotalPrice()
     }
 
     async updateProductQuantity(productId, quantity) {
@@ -46,8 +51,13 @@ export default class Cart {
             console.error('Produto não encontrado no carrinho.');
             throw new Error('Produto não encontrado no carrinho.');
         }
-    
         this.#products = productsInCart;
+        this.#updateTotalPrice()
+    }
+
+    #updateTotalPrice () {
+        const totalPrice = this.#products.reduce((acc, product) => acc + Number(product.price) * Number(product.quantity), 0)
+        this.#totalPrice = totalPrice
     }
     
     clearCart() {

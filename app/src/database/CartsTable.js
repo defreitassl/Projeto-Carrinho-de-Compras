@@ -5,9 +5,13 @@ export default class CartsTable extends Table {
         super("carts")
     }
 
+    calculateTotalPrice (productsList) {
+        const totalPrice = productsList.reduce((acc, product) => acc + Number(product.price) * Number(product.quantity), 0)
+        return totalPrice
+    }
+
     async addProduct(idCart, newProductId, price) {
         try {
-            console.log(`Adding product ID: ${newProductId} to cart ID: ${idCart}`); // Debugging log
             const cart = await super.getOne(idCart)
 
             if (!cart) {
@@ -23,6 +27,11 @@ export default class CartsTable extends Table {
                 productsInCart.push({ id: newProductId, quantity: 1, price: price })
             }
 
+            const totalPrice = this.calculateTotalPrice(productsInCart)
+            console.log("Calculating total price:" + totalPrice)
+            const response = await super.update(idCart, { totalPrice: totalPrice })
+            console.log(response)
+
             return await super.update(idCart, {products: productsInCart})
         } catch (error) {
             console.error(error)
@@ -32,7 +41,6 @@ export default class CartsTable extends Table {
 
     async decreaseProductQuantity(idCart, productId) {
         try {
-            console.log(`Decreasing quantity for product ID: ${productId} in cart ID: ${idCart}`); // Debugging log
             const cart = await super.getOne(idCart)
 
             if (!cart) {
