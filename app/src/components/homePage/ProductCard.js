@@ -56,6 +56,7 @@ export default class ProductCard extends Component {
                 const price = Number(product.querySelector(".price").innerText.replace("R$", "").replace(",", "."))
                 if (app.session.isActive) {
                     app.addProductToCart(productId, price)
+                    app.goToCartPage()
                 } else {
                     app.goToLoginPage()
                 }
