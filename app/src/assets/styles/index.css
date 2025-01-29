@@ -103,11 +103,13 @@ header {
         transition: opacity 0.3s ease;
 
         ul {
+            display: flex;
+            flex-direction: column;
             list-style: none;
+            gap: 0;
 
             li {
-                padding: 0.8rem 1.2rem;
-
+                padding: 0.8rem 1.1rem;
                 p {
                     color: #7532fb;
                     font-weight: bold;
@@ -678,5 +680,99 @@ main {
 
     button:hover {
         background-color: #5910eb;
+    }
+}
+
+/* Estilização da página do histórico de pedidos */
+.order-history-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 3rem 1rem;
+}
+
+.order-history-inner-container {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    gap: 2rem;
+
+    h1 {
+        font-size: 2rem;
+        color: var(--bg-secondary);
+    }
+}
+
+.orders-list {
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+    gap: 2rem;
+}
+
+.order-item {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: white;
+    border-radius: 16px;
+}
+
+.order-date {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    font-weight: bolder;
+    border-bottom: 1px solid var(--bg-primary);
+}
+
+.order-main-info {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    gap: 1rem;
+}
+
+.order-product-image {
+    padding: 10px;
+    border: 1px solid var(--bg-primary);
+    border-radius: 8px;
+
+    img {
+        max-height: 80px;
+    }
+}
+
+.order-product-button {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+    padding: 10px;
+
+    button {
+        padding: 10px;
+        width: max-content;
+        font-weight: bolder;
+        color: white;
+        background-color: var(--bg-secondary);
+        border: none;
+        border-radius: 8px;
+        transition: 0.1s ease;
+    }
+
+    button:hover {
+        transform: scale(0.95);
+        border-radius: 16px;
+    }
+}
+
+.order-product-total {
+    font-size: 1.2rem;
+    font-weight: bolder;
+
+    span {
+        font-size: 1rem;
+        font-weight: 300;
     }
 }

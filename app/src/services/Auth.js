@@ -89,8 +89,9 @@ export default class Auth {
         }
     }
 
-    async registerOrder (order) {
+    async registerOrder (app, order) {
         try {
+            app.session.currentUser.order(order.id)
             const responseOrder = await Database.orders.send(order)
 
             if (responseOrder.status === "OK") {
@@ -102,16 +103,26 @@ export default class Auth {
                 if (currentUserOrders.length > 0) {
                     currentUserOrders.push(order.id)
                 } else {
-                    currentUserOrders = order.id
+                    currentUserOrders = [order.id]
                 }
 
-                const responseUser = await Database.users.update(order.customer, { orders: [currentUserOrders] })
+                const responseUser = await Database.users.update(order.customer, { orders: currentUserOrders })
             } else {
                 return "Erro ao registrar pedido."
             }
             
             } catch (error) {
             throw new Error("Erro inesperado ao registrar pedido: " + error)
+        }
+    }
+
+    async getOrder (orderId) {
+        try {
+            const response = await Database.orders.getOne(orderId)
+
+            return response
+        } catch (error) {
+            throw new Error("Erro inesperado ao buscar pedido: " + error)
         }
     }
 

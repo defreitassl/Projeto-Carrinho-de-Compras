@@ -23,6 +23,8 @@ export default class CartPage {
             this.cartMessage.render();
             const cartContainer = document.querySelector(".cart-inner-container");
             cartContainer.style.display = "flex";
+            const ordersContainer = document.querySelector(".order-history-container")
+            ordersContainer.style.display = "none"
         }
         this.navbar.render();
     }

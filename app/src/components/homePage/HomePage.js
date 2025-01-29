@@ -24,6 +24,8 @@ export default class HomePage {
 
         const cartContainer = document.querySelector(".cart-inner-container");
         cartContainer.style.display = "none";
+        const ordersContainer = document.querySelector(".order-history-container")
+        ordersContainer.style.display = "none"
     }
 
     cleanScreen () {

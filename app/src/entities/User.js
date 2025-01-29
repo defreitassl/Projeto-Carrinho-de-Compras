@@ -37,6 +37,10 @@ export default class User {
         }
     }
 
+    get orders () {
+        return this.#orders
+    }
+
     order (order) {
         this.#orders.push(order)
     }

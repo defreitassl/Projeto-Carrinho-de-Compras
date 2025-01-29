@@ -19,6 +19,7 @@ export default class NavBar extends Component {
                         <li id="userBtn"><i class="fa-regular fa-user"></i></li>
                         <div class="dropdown-menu">
                             <ul>
+                                <li><p id="orderHistoryBtn">Meus Pedidos</p></liid=>
                                 <li><p id="logoutBtn">Sair da Conta</p></li>
                             </ul>
                         </div>
@@ -44,8 +45,8 @@ export default class NavBar extends Component {
         const userBtn = document.querySelector("#userBtn");
         const dropdownMenu = document.querySelector(".dropdown-menu");
 
-        userBtn.addEventListener("click", (event) => {
-            dropdownMenu.style.display = dropdownMenu.style.display === "block" ? "none" : "block"
+        userBtn.addEventListener("click", () => {
+            dropdownMenu.style.display = dropdownMenu.style.display === "flex" ? "none" : "flex"
         })
 
         document.addEventListener("click", (event) => {
@@ -55,8 +56,18 @@ export default class NavBar extends Component {
         })
 
         document.querySelector("#logoutBtn").addEventListener("click", () => {
-            authenticator.logout(app)
+            if (app.session.isActive) {
+                authenticator.logout(app)
+            }
             app.goToHomePage(app.session.isActive, null)
+        })
+
+        document.querySelector("#orderHistoryBtn").addEventListener("click", () => {
+            if (app.session.isActive) {
+                app.goToOrderHistoryPage(app.session.isActive)
+            } else {
+                app.goToLoginPage()
+            }
         })
 
         document.querySelector("#cartMenuBtn").addEventListener("click", () => {

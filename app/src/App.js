@@ -6,6 +6,8 @@ import LoginPage from "./components/loginPage/LoginPage.js"
 import CartPage from "./components/cartPage/CartPage.js"
 import Session from "./services/Session.js"
 import Order from "./entities/Order.js"
+import OrderItem from "./components/orderHistoryPage/OrderItem.js"
+import OrdersPage from "./components/orderHistoryPage/OrdersPage.js"
 import FakeStoreApi from "./services/FakeStoreApi.js"
 
 export default class App {
@@ -14,6 +16,7 @@ export default class App {
         this.homePage = new HomePage()
         this.loginPage = null
         this.cartPage = null
+        this.orderHistoryPage = null
         this.isOnHomePage = false
         this.isOnCartPage = false
         this.session = new Session()
@@ -23,8 +26,9 @@ export default class App {
         this.loginPage = new LoginPage()
         this.homePage = new HomePage()
         this.cartPage = new CartPage()
+        this.orderHistoryPage = new OrdersPage()
         this.goToHomePage(this.session.isActive)
-    }
+    } 
 
     goToHomePage(userLogged, products=false) {
         this.cleanScreen()
@@ -55,10 +59,21 @@ export default class App {
         this.loginPage.addEventListeners(this.authenticator, this)
     }
 
+    goToOrderHistoryPage() {
+        this.cleanScreen()
+        this.isOnHomePage = false
+        this.isOnCartPage = false
+        this.orderHistoryPage = new OrdersPage()
+        this.orderHistoryPage.renderScreen(this)
+        this.fetchOrders()
+        this.orderHistoryPage.addEventListeners(this.authenticator, this)
+    }
+
     cleanScreen() {
         this.homePage.cleanScreen()
         this.loginPage.cleanScreen()
         this.cartPage.cleanScreen()
+        this.orderHistoryPage.cleanScreen()
     }
 
     async renderProducts(products=false) {
@@ -130,8 +145,28 @@ export default class App {
         }
     }
 
-    async createOrder(cart) {
-        const newOrder = new Order(this.session.currentUser.id, cart.products, cart.totalPrice)
-        this.authenticator.registerOrder(newOrder)
+    async createOrder (cart) {
+        const newOrder = new Order(Number(this.session.currentUser.orders.length + 1), this.session.currentUser.id, cart.products, cart.totalPrice)
+        this.authenticator.registerOrder(this, newOrder)
+    }
+    
+    async fetchOrders () {
+        const ordersIds = this.session.currentUser.orders
+        for (const orderId of ordersIds) {
+            const order = await this.authenticator.getOrder(orderId);
+            let productsInfo = {
+                imgLinks: [],
+                titles: []
+            };
+    
+            for (const product of order.products) {
+                const productObj = await FakeStoreApi.getOneProduct(product.id.replace("a", "").trim());
+                productsInfo.imgLinks.push(productObj.image);
+                productsInfo.titles.push(productObj.title);
+            }
+            const orderItem = new OrderItem(order.date, productsInfo.imgLinks[0], productsInfo.titles, order.totalPrice)
+            orderItem.render()
+        }
+        OrderItem.addEventListeners()
     }
 }
