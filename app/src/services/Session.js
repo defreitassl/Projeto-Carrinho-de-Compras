@@ -1,8 +1,9 @@
 import User from "../entities/User.js"
+import Database from "../database/Database.js"
 
 export default class Session {
-    #currentUser
     #isActive
+    #currentUser
     #currentUserCart
 
     constructor () {
@@ -11,22 +12,32 @@ export default class Session {
         this.#currentUserCart = null
     }
 
-    initSession (user, cart) {
+    async initSession (user, cart) {
         if (user instanceof User) {
             this.#isActive = true
             this.#currentUser = user
             this.#currentUserCart = cart
+            const response = await Database.session.registerSession(this.toJSON())
+            console.log(response)
             console.log(`A seção de ${this.#currentUser.name} foi inicializada.`)
         } else {
             throw new Error("O usuário para iniciar a sessão deve ser uma instância de User.")
         }
     }
 
-    endSession () {
+    async endSession () {
         console.log(`A seção de ${this.#currentUser.name} foi encerrada.`)
         this.#isActive = false
         this.#currentUser = null
         this.#currentUserCart = null
+        await Database.session.unregisterSession(this.toJSON())
+    }
+
+    async verifySessionDb () {
+        const sessionFromDb = await Database.session.getSession()
+        this.#isActive = sessionFromDb.isActive
+        this.#currentUser = sessionFromDb.currentUser
+        this.#currentUserCart = sessionFromDb.currentUserCart
     }
 
     get isActive () {
@@ -46,6 +57,14 @@ export default class Session {
             this.#currentUser = user
         } else {
             throw new Error('O usuário deve ser uma instância de User')
+        }
+    }
+
+    toJSON () {
+        return {
+            isActive: this.#isActive,
+            currentUser: this.#currentUser ? this.#currentUser.toJSON() : null,
+            currentUserCart: this.#currentUserCart ? this.#currentUserCart.toJSON() : null
         }
     }
 }

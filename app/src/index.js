@@ -1,5 +1,5 @@
-import './assets/styles/index.css';
-import App from "./App.js";
+import './assets/styles/index.css'
+import App from "./App.js"
 
-const app = new App();
-app.init();
+const app = new App()
+app.init()

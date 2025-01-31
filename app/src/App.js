@@ -22,11 +22,12 @@ export default class App {
         this.session = new Session()
     }
 
-    init() {
+    async init() {
         this.loginPage = new LoginPage()
         this.homePage = new HomePage()
         this.cartPage = new CartPage()
         this.orderHistoryPage = new OrdersPage()
+        await this.session.verifySessionDb()
         this.goToHomePage(this.session.isActive)
     } 
 
