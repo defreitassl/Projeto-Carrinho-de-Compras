@@ -2,27 +2,9 @@
   "session": [
     {
       "id": "s1",
-      "isActive": true,
-      "currentUser": {
-        "id": "Do1",
-        "isSeller": false,
-        "name": "Douglas Freitas",
-        "email": "douglasamf14@gmail.com",
-        "password": "aaa",
-        "cartId": "Ca1",
-        "orders": [
-          "Or1Do1",
-          "Or2Do1",
-          "Or3Do1",
-          "Or4Do1"
-        ]
-      },
-      "currentUserCart": {
-        "id": "Ca1",
-        "owner": "Do1",
-        "products": [],
-        "totalPrice": 0
-      }
+      "isActive": false,
+      "currentUser": null,
+      "currentUserCart": null
     }
   ],
   "users": [
