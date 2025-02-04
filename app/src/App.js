@@ -5,6 +5,7 @@ import HomePage from "./components/homePage/HomePage.js"
 import LoginPage from "./components/loginPage/LoginPage.js"
 import CartPage from "./components/cartPage/CartPage.js"
 import Session from "./services/Session.js"
+import Cart from "./entities/Cart.js"
 import Order from "./entities/Order.js"
 import OrderItem from "./components/orderHistoryPage/OrderItem.js"
 import OrdersPage from "./components/orderHistoryPage/OrdersPage.js"
@@ -154,21 +155,29 @@ export default class App {
     async fetchOrders () {
         const ordersIds = this.session.currentUser.orders
         for (const orderId of ordersIds) {
-            const order = await this.authenticator.getOrder(orderId);
+            const order = await this.authenticator.getOrder(orderId)
             let productsInfo = {
                 imgLinks: [],
                 titles: []
-            };
-    
-            for (const product of order.products) {
-                const productObj = await FakeStoreApi.getOneProduct(product.id.replace("a", "").trim());
-                productsInfo.imgLinks.push(productObj.image);
-                productsInfo.titles.push(productObj.title);
             }
-            const orderItem = new OrderItem(order.date, productsInfo.imgLinks[0], productsInfo.titles, order.totalPrice)
+
+            for (const product of order.products) {
+                const productObj = await FakeStoreApi.getOneProduct(product.id.replace("a", "").trim())
+                productsInfo.imgLinks.push(productObj.image)
+                productsInfo.titles.push(productObj.title)
+            }
+            const orderItem = new OrderItem(order.id, order.date, productsInfo.imgLinks[0], productsInfo.titles, order.totalPrice)
             orderItem.render()
-            OrderItem.addEventListeners(this)
         }
-        OrderItem.addEventListeners()
+        OrderItem.addEventListeners(this)
+    }
+
+    async buyOrderAgain (orderId) {
+        const order = await this.authenticator.getOrder(orderId)
+        this.session.currentUserCart.clearCart()
+        order.products.forEach( async (product) => {
+            await this.addProductToCart(product.id, product.price)
+        })
+        this.goToCartPage()
     }
 }

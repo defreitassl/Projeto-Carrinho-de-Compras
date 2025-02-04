@@ -1,9 +1,9 @@
 import Component from "../Component.js"
 
 export default class OrderItem extends Component {
-    constructor (date, imgLink, title, totalPrice) {
+    constructor (id, date, imgLink, title, totalPrice) {
         super(".orders-list", `
-            <li class="order-item">
+            <li class="order-item" data-id="${id}">
                 <div class="order-date"><p>${date}</p></div>
                 <div class="order-main-info">
                     <div class="order-product-image">
@@ -27,10 +27,10 @@ export default class OrderItem extends Component {
 
     static addEventListeners (app) {
         const buyAgainButtons = document.querySelectorAll(".buy-again-button")
-
         buyAgainButtons.forEach((button) => {
             button.addEventListener("click", () => {
-                console.log("aaa")
+                const orderId = button.closest(".order-item").dataset.id
+                app.buyOrderAgain(orderId)
             })
         })
     }

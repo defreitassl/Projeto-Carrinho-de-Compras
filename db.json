@@ -12,9 +12,7 @@
         "cartId": "Ca1",
         "orders": [
           "Or1Do1",
-          "Or2Do1",
-          "Or3Do1",
-          "Or4Do1"
+          "Or2Do1"
         ]
       },
       "currentUserCart": {
@@ -35,10 +33,7 @@
       "cartId": "Ca1",
       "orders": [
         "Or1Do1",
-        "Or2Do1",
-        "Or3Do1",
-        "Or4Do1",
-        "Or5Do1"
+        "Or2Do1"
       ]
     }
   ],
@@ -56,79 +51,25 @@
       "customer": "Do1",
       "products": [
         {
-          "id": "a1",
+          "id": "a3",
           "quantity": 1,
-          "price": 109.95
+          "price": 55.99
         }
       ],
-      "totalPrice": 109.95,
-      "date": "29 de janeiro de 2025"
+      "totalPrice": 55.99,
+      "date": "4 de fevereiro de 2025"
     },
     {
       "id": "Or2Do1",
       "customer": "Do1",
       "products": [
         {
-          "id": "a14",
-          "quantity": 1,
-          "price": 999.99
-        }
-      ],
-      "totalPrice": 999.99,
-      "date": "29 de janeiro de 2025"
-    },
-    {
-      "id": "Or3Do1",
-      "customer": "Do1",
-      "products": [
-        {
-          "id": "a20",
-          "quantity": 1,
-          "price": 12.99
-        },
-        {
-          "id": "a19",
-          "quantity": 1,
-          "price": 7.95
-        },
-        {
-          "id": "a18",
-          "quantity": 1,
-          "price": 9.85
-        }
-      ],
-      "totalPrice": 30.79,
-      "date": "29 de janeiro de 2025"
-    },
-    {
-      "id": "Or4Do1",
-      "customer": "Do1",
-      "products": [
-        {
           "id": "a3",
-          "quantity": 4,
+          "quantity": 1,
           "price": 55.99
-        },
-        {
-          "id": "a5",
-          "quantity": 3,
-          "price": 695
         }
       ],
-      "totalPrice": 2308.96,
-      "date": "31 de janeiro de 2025"
-    },
-    {
-      "id": "Or5Do1",
-      "customer": "Do1",
-      "products": [
-        {
-          "id": "a19",
-          "quantity": 6,
-          "price": 7.95
-        }
-      ],
-      "totalPrice": 47.7,
+      "totalPrice": 55.99,
       "date": "4 de fevereiro de 2025"
     }
   ]
