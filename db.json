@@ -2,9 +2,27 @@
   "session": [
     {
       "id": "s1",
-      "isActive": false,
-      "currentUser": null,
-      "currentUserCart": null
+      "isActive": true,
+      "currentUser": {
+        "id": "Do1",
+        "isSeller": false,
+        "name": "Douglas Freitas",
+        "email": "douglasamf14@gmail.com",
+        "password": "aaa",
+        "cartId": "Ca1",
+        "orders": [
+          "Or1Do1",
+          "Or2Do1",
+          "Or3Do1",
+          "Or4Do1"
+        ]
+      },
+      "currentUserCart": {
+        "id": "Ca1",
+        "owner": "Do1",
+        "products": [],
+        "totalPrice": 0
+      }
     }
   ],
   "users": [
@@ -19,7 +37,8 @@
         "Or1Do1",
         "Or2Do1",
         "Or3Do1",
-        "Or4Do1"
+        "Or4Do1",
+        "Or5Do1"
       ]
     }
   ],
@@ -98,6 +117,19 @@
       ],
       "totalPrice": 2308.96,
       "date": "31 de janeiro de 2025"
+    },
+    {
+      "id": "Or5Do1",
+      "customer": "Do1",
+      "products": [
+        {
+          "id": "a19",
+          "quantity": 6,
+          "price": 7.95
+        }
+      ],
+      "totalPrice": 47.7,
+      "date": "4 de fevereiro de 2025"
     }
   ]
 }

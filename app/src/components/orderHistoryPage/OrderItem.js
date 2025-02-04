@@ -25,5 +25,13 @@ export default class OrderItem extends Component {
         this.container.innerHTML += this.content
     }
 
-    static addEventListeners () {}
+    static addEventListeners (app) {
+        const buyAgainButtons = document.querySelectorAll(".buy-again-button")
+
+        buyAgainButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+                console.log("aaa")
+            })
+        })
+    }
 }

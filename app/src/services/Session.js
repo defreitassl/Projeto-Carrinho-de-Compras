@@ -1,4 +1,5 @@
 import User from "../entities/User.js"
+import Cart from "../entities/Cart.js"
 import Database from "../database/Database.js"
 
 export default class Session {
@@ -36,8 +37,26 @@ export default class Session {
     async verifySessionDb () {
         const sessionFromDb = await Database.session.getSession()
         this.#isActive = sessionFromDb.isActive
-        this.#currentUser = sessionFromDb.currentUser
-        this.#currentUserCart = sessionFromDb.currentUserCart
+        if (sessionFromDb.currentUser && sessionFromDb.currentUserCart) {
+            this.#currentUser = new User(
+                sessionFromDb.currentUser.id,
+                sessionFromDb.currentUser.isSeller,
+                sessionFromDb.currentUser.name,
+                sessionFromDb.currentUser.email,
+                sessionFromDb.currentUser.password,
+                sessionFromDb.currentUser.cartId,
+                sessionFromDb.currentUser.orders
+            )
+            this.#currentUserCart = new Cart(
+                sessionFromDb.currentUserCart.id,
+                sessionFromDb.currentUserCart.owner,
+                sessionFromDb.currentUserCart.products,
+                sessionFromDb.currentUserCart.totalPrice
+            )
+        } else {
+            this.#currentUser = sessionFromDb.currentUser
+            this.#currentUserCart = sessionFromDb.currentUserCart
+        }
     }
 
     get isActive () {

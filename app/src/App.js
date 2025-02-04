@@ -167,6 +167,7 @@ export default class App {
             }
             const orderItem = new OrderItem(order.date, productsInfo.imgLinks[0], productsInfo.titles, order.totalPrice)
             orderItem.render()
+            OrderItem.addEventListeners(this)
         }
         OrderItem.addEventListeners()
     }
