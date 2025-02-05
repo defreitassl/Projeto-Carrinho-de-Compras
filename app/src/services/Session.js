@@ -37,21 +37,25 @@ export default class Session {
     async verifySessionDb () {
         const sessionFromDb = await Database.session.getSession()
         this.#isActive = sessionFromDb.isActive
-        if (sessionFromDb.currentUser && sessionFromDb.currentUserCart) {
+        
+        if (this.#isActive != false) {
+            const currentUser = await Database.users.getOne(sessionFromDb.currentUser)
+            const currentUserCart = await Database.carts.getOne(sessionFromDb.currentUserCart)
+
             this.#currentUser = new User(
-                sessionFromDb.currentUser.id,
-                sessionFromDb.currentUser.isSeller,
-                sessionFromDb.currentUser.name,
-                sessionFromDb.currentUser.email,
-                sessionFromDb.currentUser.password,
-                sessionFromDb.currentUser.cartId,
-                sessionFromDb.currentUser.orders
+                currentUser.id,
+                currentUser.isSeller,
+                currentUser.name,
+                currentUser.email,
+                currentUser.password,
+                currentUser.cartId,
+                currentUser.orders
             )
             this.#currentUserCart = new Cart(
-                sessionFromDb.currentUserCart.id,
-                sessionFromDb.currentUserCart.owner,
-                sessionFromDb.currentUserCart.products,
-                sessionFromDb.currentUserCart.totalPrice
+                currentUserCart.id,
+                currentUserCart.owner,
+                currentUserCart.products,
+                currentUserCart.totalPrice
             )
         } else {
             this.#currentUser = sessionFromDb.currentUser
@@ -82,8 +86,8 @@ export default class Session {
     toJSON () {
         return {
             isActive: this.#isActive,
-            currentUser: this.#currentUser ? this.#currentUser.toJSON() : null,
-            currentUserCart: this.#currentUserCart ? this.#currentUserCart.toJSON() : null
+            currentUser: this.#currentUser ? this.#currentUser.id : null,
+            currentUserCart: this.#currentUserCart ? this.#currentUserCart.id : null
         }
     }
 }

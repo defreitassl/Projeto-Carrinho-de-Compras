@@ -15,10 +15,7 @@
       "email": "douglasamf14@gmail.com",
       "password": "aaa",
       "cartId": "Ca1",
-      "orders": [
-        "Or1Do1",
-        "Or2Do1"
-      ]
+      "orders": []
     }
   ],
   "carts": [
@@ -29,32 +26,5 @@
       "totalPrice": 0
     }
   ],
-  "orders": [
-    {
-      "id": "Or1Do1",
-      "customer": "Do1",
-      "products": [
-        {
-          "id": "a3",
-          "quantity": 1,
-          "price": 55.99
-        }
-      ],
-      "totalPrice": 55.99,
-      "date": "4 de fevereiro de 2025"
-    },
-    {
-      "id": "Or2Do1",
-      "customer": "Do1",
-      "products": [
-        {
-          "id": "a3",
-          "quantity": 1,
-          "price": 55.99
-        }
-      ],
-      "totalPrice": 55.99,
-      "date": "4 de fevereiro de 2025"
-    }
-  ]
+  "orders": []
 }
