@@ -3,7 +3,7 @@ export default class Table {
     #url
     constructor (entity) {
         this.#entity = entity
-        this.#url = `http://localhost:3000/${entity}`
+        this.#url = `http://192.168.0.42:3000/${entity}`
     }
 
     get url () {

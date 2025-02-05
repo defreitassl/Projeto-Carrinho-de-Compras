@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "node ./app/src/index.js",
-    "db": "json-server --watch db.json --port 3000",
+    "db": "json-server --watch db.json --host 192.168.0.42 --port 3000",
     "pack": "npx webpack",
     "start": "webpack-dev-server",
     "build": "webpack"
