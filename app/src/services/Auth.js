@@ -50,9 +50,9 @@ export default class Auth {
 
             if (responseUser.status === "OK" && responseCart.status === "OK") {
                 app.session.initSession(newUser, newCart)
-                return response
+                return responseUser
             } else {
-                return response
+                return responseUser
             }
         } catch (error) {
             throw new Error("Erro inesperado ao criar usuário: " + error)

@@ -13,7 +13,7 @@ export default class OrderItem extends Component {
                         <p>${title}</p>
                     </div>
                     <div class="order-product-button">
-                        <p class="order-product-total">Total: <span>R$${totalPrice}</span></p>
+                        <p class="order-product-total">Total: <span>R$${totalPrice.toFixed(2)}</span></p>
                         <button class="buy-again-button">Comprar Novamente</button>
                     </div>
                 </div>

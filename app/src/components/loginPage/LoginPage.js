@@ -48,7 +48,6 @@ export default class LoginPage{
             if (name.value && email.value && password.value) {
                 const response = await authenticator.register(app, seller.checked, name.value, email.value, password.value)
 
-                alert(response.message)
                 if (response.status === "OK") {
                     app.goToHomePage(app.session.isActive)
                 } 

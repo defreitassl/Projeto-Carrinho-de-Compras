@@ -7,24 +7,7 @@
       "currentUserCart": null
     }
   ],
-  "users": [
-    {
-      "id": "Do1",
-      "isSeller": false,
-      "name": "Douglas Freitas",
-      "email": "douglasamf14@gmail.com",
-      "password": "aaa",
-      "cartId": "Ca1",
-      "orders": []
-    }
-  ],
-  "carts": [
-    {
-      "id": "Ca1",
-      "owner": "Do1",
-      "products": [],
-      "totalPrice": 0
-    }
-  ],
+  "users": [],
+  "carts": [],
   "orders": []
 }
