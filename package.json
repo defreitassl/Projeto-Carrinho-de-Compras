@@ -6,7 +6,7 @@
     "db": "json-server --watch db.json --host 0.0.0.0 --port 3000",
     "start": "webpack-dev-server --open",
     "build": "webpack",
-    "dev": "concurrently \"npm run db\" \"npm run start\""
+    "dev": "concurrently \"npm run build\" \"npm run db\" \"npm run start\""
   },
   "keywords": [],
   "author": "Douglas Freitas",
