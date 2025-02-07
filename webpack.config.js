@@ -32,16 +32,16 @@ module.exports = {
             filename: 'styles.css'
         }),
         new HtmlWebpackPlugin({
-            template: './app/dist/index.html',
+            template: './app/src/index.html',
             filename: 'index.html'
         })
     ],
     devServer: {
-        static: {
-            directory: path.resolve(__dirname, "app/dist/")
-        },
+        static: path.resolve(__dirname, "app/dist/"),
         compress: true,
-        port: 8080
+        port: 8080,
+        hot: true, 
+        open: true
     },
     devtool: "source-map"
 };
