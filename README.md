@@ -1,6 +1,6 @@
 # Projeto Carrinho de Compras
 
-Este é um projeto de **e-commerce** desenvolvido com **JavaScript vanilla** utilizando uma arquitetura modular e orientada a objetos. O objetivo deste projeto é demonstrar conceitos de componentização, operações CRUD via JSON Server, persistência de sessão e integração com APIs externas, servindo como referência para desenvolvedores iniciantes.
+Este é um projeto de **e-commerce** desenvolvido com **JavaScript vanilla** utilizando uma arquitetura modular e orientada a objetos. O objetivo deste projeto é demonstrar conceitos de componentização, operações CRUD via JSON Server, persistência de sessão e integração com APIs externas, servindo como projeto para demonstrar minha evolução e experiência como programador.
 
 ## Sumário
 
@@ -114,7 +114,7 @@ O projeto utiliza o **JSON Server** para simular uma API REST. A estrutura do ba
 
 - **Frontend:** JavaScript Vanilla, HTML5, CSS3
 - **Bundling & Transpilação:** Webpack, Babel
-- **Mock API:** JSON Server
+- **API:** JSON Server,e FakeStoreApi
 - **Estilização:** CSS (Flexbox e Grid)
 - **Ícones:** Bootstrap Icons, Font Awesome
 
@@ -136,15 +136,18 @@ O projeto utiliza o **JSON Server** para simular uma API REST. A estrutura do ba
 2. **Instale as dependências:**
 
 ``` bash
-	npm install
+    npm install
 ```
     
 3. **Inicie o App:**
 
 ```bash
-	npm run dev
+    npm run dev
 ```
 
 Este comando executa mais três outros comandos inicializando a aplicação por completo.
 
+## Contribuições
+
+Contribuições são bem-vindas! Se desejar colaborar, por favor abra uma issue ou envie um pull request com suas sugestões e melhorias
 
